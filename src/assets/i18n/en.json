@@ -54,10 +54,21 @@
         "Name": "Name",
         "Brand": "Brand"
     },
+    "ProductItem": {
+        "Brand": "Brand",
+        "Out of stock": "Out of stock",
+        "Quantity": "Quantity:",
+        "pcs": "pcs",
+        "Details": "Details:"
+    },
     "ProductDetails": {
         "Rating": "Rating: ",
         "Add": "Add to cart",
-        "Recent": "Recently viewed items: "
+        "Recent": "Recently viewed items: ",
+        "Out of stock": "Out of stock",
+        "Quantity": "Quantity:",
+        "pcs": "pcs",
+        "Details": "Details:"
     },
     "ProductDetailsDialog": {
         "Success": "This product was successfully added to your cart ",
@@ -78,12 +89,12 @@
         "Or": "or",
         "Create": "Create Acount",
         "Email": "E-mail",
-        "Forgot":"Forgot password?",
-        "Fill":"Fill email address",
-        "Send":"Send",
+        "Forgot": "Forgot password?",
+        "Fill": "Fill email address",
+        "Send": "Send",
         "EmailInvalid": "Email doesn't look right.",
         "CheckInbox": "Check yout inbox",
-        "DoesntExist":"Email not registered"
+        "DoesntExist": "Email not registered"
     },
     "New password": {
         "New password": "New password",
@@ -140,7 +151,8 @@
         "Total": "Total: ",
         "Next Step": "Next Step",
         "Continue shopping": "Continue shopping",
-        "Cart is empty": "Cart is empty"
+        "Cart is empty": "Cart is empty",
+        "Out of stock": "Out of stock"
     },
     "Order": {
         "Order review": "Order review",

@@ -25,7 +25,7 @@ export class CartComponent implements OnInit, AfterViewInit {
     private accountService: AccountService,
     private router: Router,
     private productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.accountService.userValue;
@@ -36,7 +36,11 @@ export class CartComponent implements OnInit, AfterViewInit {
         productsIds.forEach((element: string) =>
           this.productService.getProduct(element).subscribe((res) => {
             let product = res;
-            product.qty = this.cart.products[res.id];
+            if (product.itemsInStock <= this.cart.products[res.id]) {
+              product.qty = product.itemsInStock;
+              this.cart.products[res.id] = product.qty;
+            } else product.qty = this.cart.products[res.id];
+            localStorage.setItem('cart', JSON.stringify(this.cart));
             this.products.push(product);
             this.computeTotal();
           })

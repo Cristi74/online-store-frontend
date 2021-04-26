@@ -54,10 +54,21 @@
         "Name": "Name",
         "Brand": "Marke"
     },
+    "ProductItem": {
+        "Brand": "Marke",
+        "Out of stock": "Nicht vorrättig",
+        "Quantity": "Quantität:",
+        "pcs": "Stck",
+        "Details": "Einzelheiten:"
+    },
     "ProductDetails": {
         "Rating": "Bewertung: ",
         "Add": "Einkaufswagen",
-        "Recent": "Ihr Browserverlauf: "
+        "Recent": "Ihr Browserverlauf: ",
+        "Out of stock": "Nicht vorrättig",
+        "Quantity": "Quantität:",
+        "pcs": "Stck",
+        "Details": "Einzelheiten:"
     },
     "ProductDetailsDialog": {
         "Success": "Zum Einkaufswagen hinzugefügt ",
@@ -78,12 +89,12 @@
         "Or": "oder",
         "Create": "Konto erstellen",
         "Email": "E-mail",
-        "Forgot":"Passwort vergessen",
-        "Fill":"Geben Sie die E-Mail-Adresse ",
-        "Send":"Senden",
+        "Forgot": "Passwort vergessen",
+        "Fill": "Geben Sie die E-Mail-Adresse ",
+        "Send": "Senden",
         "EmailInvalid": "Ungültige E-Mail-Adresse.",
         "CheckInbox": "E-Mail überprüfen",
-        "DoesntExist":"E-Mail nicht registriert"
+        "DoesntExist": "E-Mail nicht registriert"
     },
     "New password": {
         "New password": "Neues Passwort",
@@ -140,7 +151,8 @@
         "Total": "Gesamt: ",
         "Next Step": "Nächster Schritt",
         "Continue shopping": "Mit dem Einkaufen fortfahren",
-        "Cart is empty": "Einkaufswagen ist leer"
+        "Cart is empty": "Einkaufswagen ist leer",
+        "Out of stock": "Nicht vorrättig"
     },
     "Order": {
         "Order review": "Bestellüberprüfung",

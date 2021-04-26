@@ -54,10 +54,21 @@
         "Name": "Nume",
         "Brand": "Marca"
     },
+    "ProductItem": {
+        "Brand": "Marca",
+        "Out of stock": "Stoc epuizat",
+        "Quantity": "Cantitate:",
+        "pcs": "buc",
+        "Details": "Detalii:"
+    },
     "ProductDetails": {
         "Rating": "Evaluare: ",
         "Add": "Adauga in cos",
-        "Recent": "Produse vizualizate recent: "
+        "Recent": "Produse vizualizate recent: ",
+        "Out of stock": "Stoc epuizat",
+        "Quantity": "Cantitate:",
+        "pcs": "buc",
+        "Details": "Detalii:"
     },
     "ProductDetailsDialog": {
         "Success": "Produsul a fost adaugat in cos ",
@@ -78,12 +89,12 @@
         "Or": "sau",
         "Create": "Creare Cont",
         "Email": "Email",
-        "Forgot":"Ai uitat parola?",
-        "Fill":"Introdu adresa de email pentru resetare",
-        "Send":"Trimite",
+        "Forgot": "Ai uitat parola?",
+        "Fill": "Introdu adresa de email pentru resetare",
+        "Send": "Trimite",
         "EmailInvalid": "Email invalid.",
         "CheckInbox": "Verifica adresa de email",
-        "DoesntExist":"Emailul nu exista in baza de date"
+        "DoesntExist": "Emailul nu exista in baza de date"
     },
     "New password": {
         "New password": "Schimbare parola",
@@ -140,7 +151,8 @@
         "Total": "Total: ",
         "Next Step": "Pasul urmator",
         "Continue shopping": "Continua cumparaturile",
-        "Cart is empty": "Cosul este gol"
+        "Cart is empty": "Cosul este gol",
+        "Out of stock": "Stoc epuizat"
     },
     "Order": {
         "Order review": "Comanda",

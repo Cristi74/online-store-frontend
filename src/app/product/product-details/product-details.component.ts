@@ -32,6 +32,7 @@ export class ProductDetailsComponent implements OnInit {
   displayHistory: Product[] = [];
   id = this.route.snapshot.params.id;
   qty = 1;
+  outOfStock: boolean = false;
 
   addToCart() {
     this.cartService.currentCart.pipe(first()).subscribe((res) => {
@@ -39,7 +40,9 @@ export class ProductDetailsComponent implements OnInit {
       let existInCart = false;
       for (let key in this.cart.products)
         if (key === this.product.id) {
-          this.cart.products[key] += this.qty;
+          if (this.cart.products[key] + this.qty <= this.product.itemsInStock) {
+            this.cart.products[key] += this.qty;
+          } else this.cart.products[key] = this.product.itemsInStock;
           existInCart = true;
         }
       if (!existInCart) {
@@ -57,7 +60,9 @@ export class ProductDetailsComponent implements OnInit {
     this.dialog.open(ProductDetailsDialogComponent, { data: this.product });
   }
   modifyQuantity(val: number) {
-    if (!(val === -1 && this.qty === 1)) this.qty += val;
+    if (!(val === -1 && this.qty === 1)) {
+      this.qty += val
+    };
   }
   //add to history the current product
   //display from history only 5 products and exclude current product
@@ -90,6 +95,7 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit() {
     this.productServ.getProduct(this.id).subscribe((product) => {
       this.product = product;
+      (this.product.itemsInStock <= 0) ? this.outOfStock = true : null;
       this.handleHistory(product);
     });
   }

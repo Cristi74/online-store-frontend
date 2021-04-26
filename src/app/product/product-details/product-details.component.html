@@ -21,24 +21,39 @@
       </div>
       <div class="add-to-cart">
         <p>{{ product.price }} lei</p>
-        <button (click)="addToCart(); openDialog()">
-          <span class="material-icons shopping"> shopping_cart </span> 
-          <div class='quantity' (click)='$event.stopPropagation()'>
-            <span
-              (click)="modifyQuantity(-1)"
-              class="quantity-buttons">
+        <button (click)="addToCart(); openDialog()" *ngIf="!outOfStock">
+          <span class="material-icons shopping"> shopping_cart </span>
+          <div class="quantity" (click)="$event.stopPropagation()">
+            <span (click)="modifyQuantity(-1)" class="quantity-buttons">
               -
             </span>
             <span class="larger">{{ qty }}</span>
             <span
-            (click)="modifyQuantity(1)"
-              class="quantity-buttons">
+              (click)="qty < product.itemsInStock ? modifyQuantity(1) : null"
+              class="quantity-buttons"
+            >
               +
             </span>
           </div>
-          <span class='add-text'>{{ "ProductDetails.Add" | translate }}</span>
+          <span class="add-text">{{ "ProductDetails.Add" | translate }}</span>
         </button>
+        <div class="outOfStock button" *ngIf="outOfStock">
+          {{ "ProductDetails.Out of stock" | translate }}
+        </div>
       </div>
+      <h4
+        [ngClass]="
+          product.itemsInStock >= 20
+            ? 'goodStock'
+            : product.itemsInStock > 15
+            ? 'someStock'
+            : 'limitedStock'
+        "
+        *ngIf="product.itemsInStock"
+      >
+        {{ "ProductDetails.Quantity" | translate }} {{ product.itemsInStock }}
+        {{ "ProductDetails.pcs" | translate }}
+      </h4>
     </div>
   </div>
 </div>
@@ -47,6 +62,7 @@
   <app-product-item
     *ngFor="let product of displayHistory"
     [product]="product"
+    [ngStyle]="{ margin: '15px' }"
   ></app-product-item>
   <i aria-hidden="true"></i>
   <i aria-hidden="true"></i>

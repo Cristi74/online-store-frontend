@@ -28,7 +28,7 @@ export class NewPasswordComponent implements OnInit {
     public accountService: AccountService,
     private router: Router,
     private elementRef: ElementRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -52,7 +52,7 @@ export class NewPasswordComponent implements OnInit {
     this.repeatPassword = this.formControls.repeatPassword.value;
     if (
       this.formControls.newPassword.value ==
-        this.formControls.repeatPassword.value &&
+      this.formControls.repeatPassword.value &&
       this.formControls.newPassword.value != ''
     ) {
       this.accountService.resetPassword(this.newPassword, this.token).subscribe(
@@ -80,7 +80,7 @@ export class NewPasswordComponent implements OnInit {
     }, 5000);
   }
   ngOnDestroy() {
-    if ((this, this.interval)) {
+    if ((this.interval)) {
       clearInterval(this.interval);
     }
   }

@@ -12,10 +12,12 @@
   flex-wrap: wrap;
   font-size: 1.1 em;
   justify-content: space-between;
-  margin: 2rem auto;
-  width: 80%;
+  align-items: stretch;
+  margin: auto;
+  width: 90%;
   .child {
     cursor: pointer;
+    margin: 10px;
   }
 }
 .moving-bike-img {
@@ -25,7 +27,7 @@
   image-rendering: optimizeQuality;
   width: 50px;
   position: relative;
-  animation: move 4s ease-in-out 2s;
+  animation: move 4s ease-in-out 1s;
   left: -200px;
   border-radius: 35%;
 }
@@ -132,5 +134,5 @@ label {
   margin-right: 0.2rem;
 }
 .gray {
-  color: gray;
+  color: #808080;
 }

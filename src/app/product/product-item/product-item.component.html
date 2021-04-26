@@ -1,13 +1,43 @@
-<div class="product" *ngIf="product" [routerLink]="['/products/', product.id]">
-  <img src="{{ product.image }}" alt="" />
-  <h2>{{ product.name.substring(0, 30) | titlecase }}</h2>
-  <star-rating
-    [value]="product.rating"
-    [totalstars]="5"
-    [readonly]="true"
-    checkedcolor="#ffd700"
-    uncheckedcolor="#dcdcdc"
-    size="24px"
-  ></star-rating>
-  <p>{{ product.price }} lei</p>
+<div
+  [ngClass]="product.itemsInStock <= 0 ? 'product stockOut' : 'product'"
+  *ngIf="product"
+  [routerLink]="['/products/', product.id]"
+>
+  <div class="face front">
+    <div class="outOfStock" *ngIf="product.itemsInStock <= 0">
+      {{ "ProductItem.Out of stock" | translate }}
+    </div>
+    <img src="{{ product.image }}" alt="" />
+    <h2>{{ product.name.substring(0, 30) | titlecase }}</h2>
+    <star-rating
+      [value]="product.rating"
+      [totalstars]="5"
+      [readonly]="true"
+      checkedcolor="#ffd700"
+      uncheckedcolor="#dcdcdc"
+      size="24px"
+    ></star-rating>
+    <p>{{ product.price }} lei</p>
+  </div>
+  <div class="face back">
+    <h2>{{ "ProductItem.Brand" | translate }}</h2>
+    <h3>
+      {{ product.brand | titlecase }}
+    </h3>
+    <h4 class="details-header">{{ "ProductItem.Details" | translate }}</h4>
+    <p class="details">{{ product.description.substr(0, 100) }}</p>
+    <h4
+      class="stockPosition"
+      [ngClass]="
+        product.itemsInStock >= 20
+          ? 'goodStock'
+          : product.itemsInStock > 10
+          ? 'someStock'
+          : 'limitedStock'
+      "
+    >
+      {{ "ProductItem.Quantity" | translate }} {{ product.itemsInStock }}
+      {{ "ProductItem.pcs" | translate }}
+    </h4>
+  </div>
 </div>
