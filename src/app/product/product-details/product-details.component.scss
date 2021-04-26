@@ -45,6 +45,19 @@
         font-weight: 500;
         margin-bottom: 20px;
       }
+      .outOfStock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 250px;
+        color: #fff;
+        border: none;
+        line-height: 25px;
+        background: #808080;
+        font-size: 20px;
+        border-radius: 5px;
+      }
       button {
         height: 50px;
         width: 250px;
@@ -118,4 +131,17 @@
 }
 .margin {
   margin-left: 120px;
+}
+.limitedStock {
+  color: #ff0000;
+  font-size: large;
+  margin: 0 auto;
+}
+.someStock {
+  color: #ffa500;
+  margin: 0 auto;
+}
+.goodStock {
+  color: #008000;
+  font-size: large;
 }

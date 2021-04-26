@@ -24,19 +24,28 @@
         <div class="poduct-wraper">
           <div class="product-data">
             <p>{{ "Cart.Quantity" | translate }}</p>
-            <button
-              (click)="modifyQuantity(product.id, -1)"
-              class="quantity-buttons"
-            >
-              -
-            </button>
-            <span class="larger">{{ product.qty }}</span>
-            <button
-              (click)="modifyQuantity(product.id, 1)"
-              class="quantity-buttons"
-            >
-              +
-            </button>
+            <div class="outOfStock" *ngIf="product.itemsInStock <= 0">
+              {{ "Cart.Out of stock" | translate }}
+            </div>
+            <div *ngIf="product.itemsInStock > 0">
+              <button
+                (click)="modifyQuantity(product.id, -1)"
+                class="quantity-buttons"
+              >
+                -
+              </button>
+              <span class="larger">{{ product.qty }}</span>
+              <button
+                (click)="
+                  product.itemsInStock > product.qty
+                    ? modifyQuantity(product.id, 1)
+                    : null
+                "
+                class="quantity-buttons"
+              >
+                +
+              </button>
+            </div>
           </div>
           <div class="product-data">
             <p>{{ "Cart.Price" | translate }}</p>

@@ -9,7 +9,7 @@
       <h2>{{ "Order.Order review" | translate }}</h2>
       <div *ngFor="let product of products" class="space-between">
         <div class="image-detail">
-          <img src="{{ product.image }}" />
+          <img src="{{ product.image }}" alt="" />
           <p>{{ product.name.slice(0, 40) | titlecase }}</p>
         </div>
         <div>
