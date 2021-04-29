@@ -121,6 +121,7 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.pageSize = parseInt(JSON.parse(sessionStorage.getItem('pageSize') || '10'));
     this.sortBy = JSON.parse(sessionStorage.getItem('sortBy') || '{}');
     this.descending = JSON.parse(sessionStorage.getItem('descending') || 'true');
@@ -143,7 +144,6 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
   ngAfterViewInit() {
-    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.darkTheme ?
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
       : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';

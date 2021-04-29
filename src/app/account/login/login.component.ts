@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: [
@@ -135,8 +136,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
-    console.log(this.darkTheme)
     this.darkTheme ?
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
       : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';

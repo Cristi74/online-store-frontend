@@ -43,6 +43,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     if (Object.keys(this.cart).length > 0) {
       let productsIds = Object.keys(this.cart.products);
       productsIds.forEach((element: string) =>
@@ -92,7 +93,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
     )
   }
   ngAfterViewInit() {
-    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.darkTheme ?
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
       : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';

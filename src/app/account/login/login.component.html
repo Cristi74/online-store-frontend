@@ -43,7 +43,8 @@
           [type]="hide ? 'password' : 'text'"
           formControlName="password"
           [ngClass]="{
-            'is-invalid': submitted && formControls.password.errors
+            'is-invalid': submitted && formControls.password.errors,
+            'elevated-dark': darkTheme
           }"
           placeholder="{{ 'Login.Password' | translate }}"
           title="Password must contain: one uppercase letter, one number,
@@ -95,6 +96,7 @@
           placeholder="{{ 'Login.Email' | translate }}"
           formControlName="email"
           (keyup)="removeDoesntExist()"
+          [ngClass]="{ 'elevated-dark': darkTheme }"
         />
         <button
           class="send-email"
