@@ -2,10 +2,11 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { SearchService } from './../../services/search.service';
 import { CartService } from './../../services/cart.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-
+import { parse } from 'node:path';
+import { stringify } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -18,8 +19,9 @@ export class NavbarComponent implements OnInit {
   qtyEmitter$ = new BehaviorSubject<number>(this.qty);
   userLogged!: boolean;
   user!: User;
-  userLanguage='';
+  userLanguage = '';
   userOptions = false;
+  darkTheme = false;
   constructor(
     private cartService: CartService,
     private searchService: SearchService,
@@ -27,16 +29,16 @@ export class NavbarComponent implements OnInit {
     public translate: TranslateService
   ) {
     translate.addLangs(['ro', 'en', 'de']);
-    if(!localStorage.hasOwnProperty('lang'))
+    if (!localStorage.hasOwnProperty('lang'))
       localStorage.setItem('lang', JSON.stringify('en'));
-    this.userLanguage=JSON.parse(localStorage.getItem('lang') || 'null');
-    let browserLang:string;
-    if(this.userLanguage!='') browserLang=this.userLanguage;
+    this.userLanguage = JSON.parse(localStorage.getItem('lang') || 'null');
+    let browserLang: string;
+    if (this.userLanguage != '') browserLang = this.userLanguage;
     else browserLang = translate.getBrowserLang();
     translate.setDefaultLang(browserLang);
     translate.use(browserLang.match(/ro|en|de/) ? browserLang : 'en');
   }
-
+  @Output() curentTheme: EventEmitter<string> = new EventEmitter();
   changeSearchTerm(event: any) {
     this.searchTerm = event.target.value;
     this.searchService.changeTerm(this.searchTerm);
@@ -67,11 +69,24 @@ export class NavbarComponent implements OnInit {
       for (let key in this.cart.products) this.qty += this.cart.products[key];
       this.qtyEmitter$.next(this.qty);
     });
+    !localStorage.hasOwnProperty('darkTheme') ? localStorage.setItem('darkTheme', JSON.stringify(this.darkTheme)) :
+      this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
   }
 
   goToLogin() {
     this.router.navigate(['/account/login'], {
       state: { redirect: this.router.url },
     });
+  }
+
+  changeTheme() {
+    this.darkTheme = !this.darkTheme;
+    localStorage.setItem('darkTheme', JSON.stringify(this.darkTheme));
+    this.changeThemes();
+  }
+  changeThemes() {
+    let bckColor = this.darkTheme ? "#3d3c3c" : "#fafbfc";
+    this.curentTheme.emit(bckColor);
+    console.log(this.curentTheme.emit(bckColor), bckColor)
   }
 }

@@ -1,5 +1,5 @@
-<div class="details" *ngIf="product">
-  <app-navbar></app-navbar>
+<div class="details" *ngIf="product" [ngClass]="{ dark: darkTheme }">
+  <app-navbar (curentTheme)="receive($event)"></app-navbar>
   <h1>{{ product.name | titlecase }}</h1>
   <div class="product-information">
     <img [src]="product.image" alt="" />
@@ -63,6 +63,7 @@
     *ngFor="let product of displayHistory"
     [product]="product"
     [ngStyle]="{ margin: '15px' }"
+    [darkTheme]="darkTheme"
   ></app-product-item>
   <i aria-hidden="true"></i>
   <i aria-hidden="true"></i>

@@ -1,15 +1,20 @@
-<app-navbar></app-navbar>
+<app-navbar (curentTheme)="receive($event)"></app-navbar>
 <div class="container" *ngIf="products.length">
-  <div class="order-summary mat-elevation-z2">
+  <div
+    class="order-summary mat-elevation-z2"
+    [ngClass]="{ 'elevated-dark': darkTheme }"
+  >
     <h2 class="line">{{ "Cart.Products in cart" | translate }}</h2>
     <div *ngFor="let product of products" class="product line">
       <div><img src="{{ product.image }}" alt="" class="product-image" /></div>
       <div class="product-section">
         <div class="product-name">
           <h2>
-            <a [routerLink]="['/products/', product.id]">{{
-              product.name.substring(0, 50) | titlecase
-            }}</a>
+            <a
+              [routerLink]="['/products/', product.id]"
+              [ngClass]="{ 'elevated-dark': darkTheme }"
+              >{{ product.name.substring(0, 50) | titlecase }}</a
+            >
           </h2>
           <star-rating
             class="star-rating"
@@ -31,6 +36,10 @@
               <button
                 (click)="modifyQuantity(product.id, -1)"
                 class="quantity-buttons"
+                [ngClass]="{
+                  'elevated-dark': darkTheme,
+                  'quantity-buttons-light': !darkTheme
+                }"
               >
                 -
               </button>
@@ -42,6 +51,10 @@
                     : null
                 "
                 class="quantity-buttons"
+                [ngClass]="{
+                  'elevated-dark': darkTheme,
+                  'quantity-buttons-light': !darkTheme
+                }"
               >
                 +
               </button>
@@ -60,7 +73,10 @@
     </div>
   </div>
 
-  <div class="calculation mat-elevation-z2">
+  <div
+    class="calculation mat-elevation-z2"
+    [ngClass]="{ 'elevated-dark': darkTheme }"
+  >
     <h2 class="line">{{ "Cart.Order review" | translate }}</h2>
     <div class="calculation-body">
       <p class="space-between">{{ "Cart.Products price" | translate }}</p>
@@ -89,7 +105,10 @@
   </div>
 </div>
 <div class="empty-cart-container" *ngIf="products.length === 0">
-  <div class="empty mat-elevation-z2">
+  <div
+    class="empty mat-elevation-z2"
+    [ngClass]="{ 'elevated-dark': darkTheme }"
+  >
     {{ "Cart.Cart is empty" | translate }}
   </div>
   <button class="margin2 back-button" style="width: 14rem" [routerLink]="'/'">

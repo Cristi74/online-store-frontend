@@ -1,18 +1,27 @@
-<app-navbar></app-navbar>
+<app-navbar (curentTheme)="receive($event)"></app-navbar>
 
-<div class="sort-container">
+<div class="sort-container" [ngClass]="{ dark: darkTheme }">
   <div class="sort-item">
     <label for="order">{{ "ProductList.Sort" | translate }}</label>
     <select
       name="order"
       (change)="selectSortCriteria($event)"
       [(ngModel)]="sortBy"
+      [ngClass]="{ 'elevated-dark': darkTheme }"
     >
       <option value="-">-</option>
-      <option value="Price">{{ "ProductList.Price" | translate }}</option>
-      <option value="Rating">{{ "ProductList.Rating" | translate }}</option>
-      <option value="Name">{{ "ProductList.Name" | translate }}</option>
-      <option value="Brand">{{ "ProductList.Brand" | translate }}</option>
+      <option value="Price">
+        {{ "ProductList.Price" | translate }}
+      </option>
+      <option value="Rating">
+        {{ "ProductList.Rating" | translate }}
+      </option>
+      <option value="Name">
+        {{ "ProductList.Name" | translate }}
+      </option>
+      <option value="Brand">
+        {{ "ProductList.Brand" | translate }}
+      </option>
     </select>
   </div>
   <div
@@ -29,12 +38,19 @@
     >{{ "ProductList.Ascending" | translate }}
   </div>
 </div>
-<img src="../../../assets/Bike.jpg" class="moving-bike-img" alt="bike runing" />
+<div>
+  <img
+    src="../../../assets/PNGIX.com_bicycle-png_1213951.png"
+    class="moving-bike-img"
+    alt="bike runing"
+  />
+</div>
 <div class="product-list">
   <app-product-item
     class="child"
     *ngFor="let product of products | filterProduct: searchTerm"
     [product]="product"
+    [darkTheme]="darkTheme"
   ></app-product-item>
   <i aria-hidden="true"></i>
   <i aria-hidden="true"></i>

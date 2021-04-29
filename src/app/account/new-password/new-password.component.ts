@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/services/account.service';
@@ -21,16 +21,18 @@ export class NewPasswordComponent implements OnInit {
   passwordMatch: boolean = true;
   token = this.route.snapshot.queryParams.token;
   resp: any;
+  darkTheme!: boolean;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     public accountService: AccountService,
     private router: Router,
-    private elementRef: ElementRef
   ) { }
 
   ngOnInit(): void {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.form = this.formBuilder.group({
       newPassword: [
         '',

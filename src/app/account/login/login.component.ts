@@ -1,5 +1,5 @@
 import { CartService } from './../../../services/cart.service';
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError, first } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { from, of } from 'rxjs';
   templateUrl: 'login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   form!: FormGroup;
   emailForm!: FormGroup;
   exist = true;
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   errorFromServer = false;
   popup = false;
   email = false;
+  darkTheme!: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
     public accountService: AccountService,
     private elementRef: ElementRef,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -120,22 +121,25 @@ export class LoginComponent implements OnInit {
           this.exist = true;
         },
         (err) => {
-          if(err.status=404) this.exist=false;
-          this.inexistentEmail=this.emailForm.controls.email.value;
+          if (err.status = 404) this.exist = false;
+          this.inexistentEmail = this.emailForm.controls.email.value;
           console.log(err);
         }
       );
   }
 
-  removeDoesntExist(){
-    if(this.emailForm.controls.email.value!==this.inexistentEmail)
-      this.exist=true;
-    else this.exist=false;
+  removeDoesntExist() {
+    if (this.emailForm.controls.email.value !== this.inexistentEmail)
+      this.exist = true;
+    else this.exist = false;
   }
 
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      '#fafbfc';
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    console.log(this.darkTheme)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
   }
   backToPreviousPage() {
     const { redirect } = window.history.state;

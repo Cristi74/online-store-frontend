@@ -3,6 +3,10 @@
   display: block;
   perspective: 600px;
 }
+.product-light {
+  background-color: white;
+  color: #000;
+}
 .product {
   @media only screen and (max-width: 460px) {
     width: 99%;
@@ -12,12 +16,11 @@
   text-align: center;
   padding-bottom: 1%;
   border-radius: 3px;
-  background-color: white;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 2s;
   // transform: rotateY(180deg);
-  @include mat-elevation(3);
+  @include mat-elevation(6);
 }
 .stockOut {
   background-color: #ddd;
@@ -54,7 +57,7 @@
   }
 }
 .back {
-  background-color: #ffffff;
+  // background-color: #ffffff;
   position: absolute;
   transform: rotateY(180deg);
   border: 2px solid;
