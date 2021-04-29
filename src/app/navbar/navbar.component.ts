@@ -5,8 +5,6 @@ import { CartService } from './../../services/cart.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { parse } from 'node:path';
-import { stringify } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
