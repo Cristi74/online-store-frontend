@@ -24,6 +24,7 @@
   img {
     width: 7rem;
     margin-bottom: 1rem;
+    cursor: pointer;
   }
   input {
     height: 2rem;
@@ -111,6 +112,9 @@
   .invalid-feedback {
     color: #ff0000;
   }
+  .confirm-light {
+    background-color: #ffffff;
+  }
   .confirm {
     position: fixed;
     left: 50%;
@@ -120,7 +124,6 @@
     padding: 3rem;
     min-width: 40%;
     text-align: center;
-    background-color: #ffffff;
     border-radius: 2%;
     border: 2px solid #e02525;
     width: 100%;

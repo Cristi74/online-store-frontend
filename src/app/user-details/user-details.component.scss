@@ -120,8 +120,10 @@
     padding-left: 3%;
   }
 }
-.edit-btn {
+.edit-btn-light {
   background-color: white;
+}
+.edit-btn {
   border: none;
   height: 30px;
   cursor: pointer;
@@ -153,6 +155,9 @@ mat-icon {
   margin-top: 10px;
   height: 20px;
 }
+.confirm-light {
+  background-color: #ffffff;
+}
 .confirm {
   position: fixed;
   left: 50%;
@@ -162,11 +167,11 @@ mat-icon {
   padding: 3rem;
   min-width: 40%;
   text-align: center;
-  background-color: white;
   border-radius: 2%;
   border: 2px solid #56c465;
   .mat-icon {
     font-size: 3rem;
     color: #56c465;
+    margin: 0 5px 30px 0;
   }
 }

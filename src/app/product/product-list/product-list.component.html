@@ -7,19 +7,19 @@
       name="order"
       (change)="selectSortCriteria($event)"
       [(ngModel)]="sortBy"
-      style="background-color: transparent"
+      [ngClass]="{ 'elevated-dark': darkTheme }"
     >
-      <option value="-" [ngClass]="{ dark: darkTheme }">-</option>
-      <option value="Price" [ngClass]="{ dark: darkTheme }">
+      <option value="-">-</option>
+      <option value="Price">
         {{ "ProductList.Price" | translate }}
       </option>
-      <option value="Rating" [ngClass]="{ dark: darkTheme }">
+      <option value="Rating">
         {{ "ProductList.Rating" | translate }}
       </option>
-      <option value="Name" [ngClass]="{ dark: darkTheme }">
+      <option value="Name">
         {{ "ProductList.Name" | translate }}
       </option>
-      <option value="Brand" [ngClass]="{ dark: darkTheme }">
+      <option value="Brand">
         {{ "ProductList.Brand" | translate }}
       </option>
     </select>

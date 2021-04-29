@@ -12,7 +12,7 @@
       <input
         type="text"
         (keyup)="changeSearchTerm($event)"
-        [ngClass]="{ dark: darkTheme }"
+        [ngClass]="{ 'elevated-dark': darkTheme }"
       /><span class="material-icons search-icon"> search </span>
     </div>
     <div (click)="changeTheme()" style="cursor: pointer">
@@ -98,7 +98,7 @@
       <p class="language-selector-p">
         {{ "Navbar.Language" | translate }}
         <select
-          [ngClass]="{ dark: darkTheme }"
+          [ngClass]="{ 'elevated-dark': darkTheme }"
           #langSelect
           (change)="
             translate.use(langSelect.value); setLanguage(langSelect.value)

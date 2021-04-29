@@ -1,46 +1,47 @@
-<div class="register">
-  <img src="../../../assets/estore.jpg" alt="" routerLink="/" />
-  <form [formGroup]='form' (ngSubmit)="submit()">
-    <h1>{{"Register.Register" | translate}}</h1>
+<div
+  class="register"
+  [ngClass]="{
+    'elevated-dark': darkTheme
+  }"
+>
+  <img src="../../../assets/eStore.png" alt="" routerLink="/" />
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h1>{{ "Register.Register" | translate }}</h1>
     <hr />
-    <div class='flex-container'>
-      <div class='column'>
-        <label for="firstName">*{{"Register.FirstName" | translate}}</label>
-        <div class='inputs'>
-          <input
-            type="text"
-            formControlName="firstName"
-          />
+    <div class="flex-container">
+      <div class="column">
+        <label for="firstName">*{{ "Register.FirstName" | translate }}</label>
+        <div class="inputs">
+          <input type="text" formControlName="firstName" />
         </div>
-        <label for="lastName">*{{"Register.LastName" | translate}}</label>
+        <label for="lastName">*{{ "Register.LastName" | translate }}</label>
+        <div class="inputs">
+          <input type="text" formControlName="lastName" />
+        </div>
+        <label for="email">*{{ "Register.Email" | translate }}</label>
+        <div class="inputs">
+          <input type="text" formControlName="email" (keyup)="checkEmail()" />
+        </div>
+        <div *ngIf="f.email.errors?.email && !f.email.pristine" class="red">
+          {{ "Register.EmailInvalid" | translate }}
+        </div>
+        <div *ngIf="emailExists" class="red">
+          {{ "Register.EmailUsed" | translate }}
+        </div>
+
+        <label for="username">*{{ "Register.Username" | translate }}</label>
         <div class="inputs">
           <input
             type="text"
-            formControlName="lastName"
-          />
-        </div>
-        <label for="email">*{{"Register.Email" | translate}}</label>
-        <div class="inputs" ><input type="text" formControlName="email" (keyup)='checkEmail()'/></div>
-        <div *ngIf="f.email.errors?.email && !f.email.pristine" class='red'>
-          {{"Register.EmailInvalid" | translate}}
-        </div>
-        <div *ngIf="emailExists" class='red'>
-          {{"Register.EmailUsed" | translate}}
-        </div>
-      
-        <label for="username">*{{"Register.Username" | translate}}</label>
-        <div class="inputs" >
-          <input
-            type="text"
             formControlName="username"
-            (keyup)='checkUsername()'
+            (keyup)="checkUsername()"
           />
         </div>
-        <div *ngIf="usernameExists" class='red'>
-          {{"Register.UsernameInvalid" | translate}}
+        <div *ngIf="usernameExists" class="red">
+          {{ "Register.UsernameInvalid" | translate }}
         </div>
-       
-        <label for="password">*{{"Register.Password" | translate}}</label>
+
+        <label for="password">*{{ "Register.Password" | translate }}</label>
         <div class="inputs">
           <input
             [type]="hide1 ? 'password' : 'text'"
@@ -50,91 +51,93 @@
             hide1 ? "visibility_off" : "visibility"
           }}</mat-icon>
         </div>
-        <div *ngIf="f.password.errors && f.password.errors.pattern" class='red'>
-          <p> {{"Register.PasswordLength" | translate}}</p>
-          <p> {{"Register.Case" | translate}}</p>
-          <p> {{"Register.Number" | translate}}</p>
+        <div *ngIf="f.password.errors && f.password.errors.pattern" class="red">
+          <p>{{ "Register.PasswordLength" | translate }}</p>
+          <p>{{ "Register.Case" | translate }}</p>
+          <p>{{ "Register.Number" | translate }}</p>
         </div>
-        <label for="repeat-password">*{{"Register.PasswordRepeat" | translate}}</label>
+        <label for="repeat-password"
+          >*{{ "Register.PasswordRepeat" | translate }}</label
+        >
         <div class="inputs">
-          <input 
-            [type]="hide2 ? 'password' : 'text'" 
+          <input
+            [type]="hide2 ? 'password' : 'text'"
             formControlName="passwordRetype"
-            />
+          />
           <mat-icon (click)="hide2 = !hide2">{{
             hide2 ? "visibility_off" : "visibility"
           }}</mat-icon>
         </div>
-        <div *ngIf="f.passwordRetype.value!==f.password.value && !f.passwordRetype.pristine" class='red'>
-          {{"Register.PasswordInvalid" | translate}}
+        <div
+          *ngIf="
+            f.passwordRetype.value !== f.password.value &&
+            !f.passwordRetype.pristine
+          "
+          class="red"
+        >
+          {{ "Register.PasswordInvalid" | translate }}
         </div>
       </div>
-      <div class='column'>
-        <label for="phone">*{{"Register.Phone" | translate}}</label>
+      <div class="column">
+        <label for="phone">*{{ "Register.Phone" | translate }}</label>
         <div class="inputs">
-        <input
-          type="tel"
-          formControlName="telephone"
-        /></div>
-        <div *ngIf="!f.telephone.valid! && !f.telephone.pristine" class='red'>
-          {{"Register.PhoneInvalid" | translate}}
+          <input type="tel" formControlName="telephone" />
         </div>
-        <label for="address">*{{"Register.Address" | translate}}</label>
+        <div *ngIf="!f.telephone.valid! && !f.telephone.pristine" class="red">
+          {{ "Register.PhoneInvalid" | translate }}
+        </div>
+        <label for="address">*{{ "Register.Address" | translate }}</label>
         <div class="inputs">
-          <input 
-            type="text"
-            formControlName="address"
-          />
+          <input type="text" formControlName="address" />
         </div>
-        <label for="county">*{{"Register.County" | translate}}</label>
+        <label for="county">*{{ "Register.County" | translate }}</label>
         <div class="inputs">
-          <input
-            type="text"
-            formControlName="county"
-          />
+          <input type="text" formControlName="county" />
         </div>
-        <label for="city">*{{"Register.City" | translate}}</label>
+        <label for="city">*{{ "Register.City" | translate }}</label>
         <div class="inputs">
-          <input
-            type="text"
-            formControlName="city"
-          />
+          <input type="text" formControlName="city" />
         </div>
-        <label for="postal-code">{{"Register.PostalCode" | translate}}</label>
+        <label for="postal-code">{{ "Register.PostalCode" | translate }}</label>
         <div class="inputs">
-          <input
-            type="text"
-            formControlName="postalCode"
-          />
+          <input type="text" formControlName="postalCode" />
         </div>
-        <label for="title" class='gender-label'>{{"Register.Gender" | translate}}</label>
+        <label for="title" class="gender-label">{{
+          "Register.Gender" | translate
+        }}</label>
         <select name="title" formControlName="sex">
           <option>F</option>
           <option>M</option>
-          <option>{{"Register.Other" | translate}}</option></select
-        >
+          <option>{{ "Register.Other" | translate }}</option>
+        </select>
       </div>
     </div>
-      <p class='align-left'>* {{"Register.Fields" | translate}} </p>
-      <hr />
-      <button
-        [ngClass]="
-          !form.valid || usernameExists || emailExists ? 'register-user-disabled' : 'register-button'
-        "
-        type="submit"
-        [disabled]="!form.valid || usernameExists || emailExists"
-      >
-        {{"Register.Register" | translate}}
-      </button>
+    <p class="align-left">* {{ "Register.Fields" | translate }}</p>
+    <hr />
+    <button
+      [ngClass]="
+        !form.valid || usernameExists || emailExists
+          ? 'register-user-disabled'
+          : 'register-button'
+      "
+      type="submit"
+      [disabled]="!form.valid || usernameExists || emailExists"
+    >
+      {{ "Register.Register" | translate }}
+    </button>
   </form>
   <div class="confirm" *ngIf="success == 1">
     <mat-icon>check_circle_outline</mat-icon>
-    <h3>{{"Register.Success" | translate}}</h3>
-    <h2>{{"Register.Confirmation" | translate}}</h2>
+    <h3>{{ "Register.Success" | translate }}</h3>
+    <h2>{{ "Register.Confirmation" | translate }}</h2>
   </div>
-  <div class="confirm" *ngIf="success == 2" [style.visibility]="dialogVisibility ? 'visible' : 'hidden'">
+  <div
+    class="confirm"
+    *ngIf="success == 2"
+    [style.visibility]="dialogVisibility ? 'visible' : 'hidden'"
+  >
     <mat-icon>check_circle_outline</mat-icon>
-    <h3>{{message}}</h3>
+    <h3>{{ message }}</h3>
     <h2>Please try again with a different username</h2>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <app-navbar (curentTheme)="receive($event)"></app-navbar>
-<div class="user-details" [ngClass]="{ dark: darkTheme }">
+<div class="user-details" [ngClass]="{ 'elevated-dark': darkTheme }">
   <div class="user-name">
     <div class="user-img">
       <p class="user-logo">{{ userLogo }}</p>
@@ -30,7 +30,15 @@
     <div class="user-account-info">
       <h4>
         {{ "AccountInfo.Account Info" | translate }}
-        <button (click)="enableNameForm()" title="edit" class="edit-btn">
+        <button
+          (click)="enableNameForm()"
+          title="edit"
+          class="edit-btn"
+          [ngClass]="{
+            'elevated-dark': darkTheme,
+            'edit-btn-light': !darkTheme
+          }"
+        >
           <span class="material-icons"> mode_edit </span>
         </button>
       </h4>
@@ -89,7 +97,15 @@
       <div>
         <h4>
           {{ "AccountInfo.Change password" | translate }}
-          <button title="edit" class="edit-btn" (click)="enablePasswordForm()">
+          <button
+            title="edit"
+            class="edit-btn"
+            (click)="enablePasswordForm()"
+            [ngClass]="{
+              'elevated-dark': darkTheme,
+              'edit-btn-light': !darkTheme
+            }"
+          >
             <span class="material-icons"> mode_edit </span>
           </button>
         </h4>
@@ -188,7 +204,15 @@
         {{ "AccountInfo.Submit" | translate }}
       </button>
     </form>
-    <button title="edit" class="edit-btn" (click)="enableAddressForm()">
+    <button
+      title="edit"
+      class="edit-btn"
+      (click)="enableAddressForm()"
+      [ngClass]="{
+        'elevated-dark': darkTheme,
+        'edit-btn-light': !darkTheme
+      }"
+    >
       <span class="material-icons"> mode_edit </span>
     </button>
   </div>
@@ -203,7 +227,14 @@
       (sectionEvent)="receiveSectionChangeFromOrderItem($event)"
     ></app-order-item>
   </div>
-  <div class="confirm" *ngIf="confirm">
+  <div
+    class="confirm"
+    *ngIf="confirm"
+    [ngClass]="{
+      dark: darkTheme,
+      'confirm-light': !darkTheme
+    }"
+  >
     <mat-icon>check_circle_outline</mat-icon>
     <h2>{{ "AccountInfo.Succes" | translate }}</h2>
   </div>
