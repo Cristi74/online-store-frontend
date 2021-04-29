@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from '../../../services/account.service';
@@ -7,7 +7,7 @@ import { AccountService } from '../../../services/account.service';
   templateUrl: 'layout.component.html',
   styleUrls: ['./layout.component.scss'],
 })
-export class LayoutComponent implements AfterViewInit {
+export class LayoutComponent implements OnInit, AfterViewInit {
   userLanguage = '';
   constructor(
     private router: Router,
@@ -29,8 +29,10 @@ export class LayoutComponent implements AfterViewInit {
   setLanguage(lang: string) {
     localStorage.setItem('lang', JSON.stringify(lang));
   }
-  ngAfterViewInit() {
+  ngOnInit() {
     this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+  }
+  ngAfterViewInit() {
     this.darkTheme ?
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
       : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
