@@ -1,9 +1,11 @@
 @import "~@angular/material/theming";
+.container-light {
+  background: white;
+}
 .container {
   padding: 2%;
   max-width: 55%;
   min-width: fit-content;
-  background: white;
   border-radius: 2%;
   display: flex;
   align-self: center;
@@ -59,17 +61,17 @@
   .spacer {
     margin: 1rem;
   }
-  .forgot{
+  .forgot {
     padding: 0.5rem;
     text-align: right;
   }
-  .forgot:hover{
+  .forgot:hover {
     cursor: pointer;
   }
-  .forgot:active{
+  .forgot:active {
     outline: none;
   }
-  .send-email{
+  .send-email {
     background-image: linear-gradient(to right, #5fd4d2, #634fbd 40%);
     color: white;
     min-width: 20vmin;
@@ -81,10 +83,10 @@
     margin: 0;
     cursor: pointer;
   }
-  .send-email-disabled{
+  .send-email-disabled {
     background-image: linear-gradient(to right, #5fd4d270, #634fbd77 40%);
   }
-  .forgot-section{
+  .forgot-section {
     display: flex;
     flex-direction: row;
   }
@@ -136,4 +138,3 @@ body {
   margin: 5% auto;
   max-height: 90%;
 }
-

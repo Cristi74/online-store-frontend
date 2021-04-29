@@ -8,7 +8,7 @@ import { AccountService } from '../../../services/account.service';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements AfterViewInit {
-  userLanguage='';
+  userLanguage = '';
   constructor(
     private router: Router,
     private accountService: AccountService,
@@ -16,20 +16,23 @@ export class LayoutComponent implements AfterViewInit {
     public translate: TranslateService
   ) {
     translate.addLangs(['ro', 'en', 'de']);
-    if(!localStorage.hasOwnProperty('lang'))
+    if (!localStorage.hasOwnProperty('lang'))
       localStorage.setItem('lang', JSON.stringify('en'));
-    this.userLanguage=JSON.parse(localStorage.getItem('lang') || 'null');
-    let browserLang:string;
-    if(this.userLanguage!='') browserLang=this.userLanguage;
+    this.userLanguage = JSON.parse(localStorage.getItem('lang') || 'null');
+    let browserLang: string;
+    if (this.userLanguage != '') browserLang = this.userLanguage;
     else browserLang = translate.getBrowserLang();
     translate.setDefaultLang(browserLang);
     translate.use(browserLang.match(/ro|en|de/) ? browserLang : 'ro');
   }
+  darkTheme!: boolean;
   setLanguage(lang: string) {
     localStorage.setItem('lang', JSON.stringify(lang));
   }
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      '#fafbfc';
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
   }
 }

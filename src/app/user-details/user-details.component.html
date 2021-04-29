@@ -1,5 +1,5 @@
-<app-navbar></app-navbar>
-<div class="user-details">
+<app-navbar (curentTheme)="receive($event)"></app-navbar>
+<div class="user-details" [ngClass]="{ dark: darkTheme }">
   <div class="user-name">
     <div class="user-img">
       <p class="user-logo">{{ userLogo }}</p>

@@ -1,7 +1,12 @@
-<div class="container mat-elevation-z2">
-  <img src="../../../assets/estore.jpg" alt="logo" routerLink="/" />
+<div
+  class="container mat-elevation-z2"
+  [ngClass]="{ 'elevated-dark': darkTheme }"
+>
+  <img src="../../../assets/eStore.png" alt="logo" routerLink="/" />
   <h2>{{ "Login.Authentication" | translate }}</h2>
-  <div>
+  <div
+    [ngClass]="{ 'elevated-dark': darkTheme, 'light-container': !darkTheme }"
+  >
     <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-group inputs">
         <input
@@ -76,33 +81,46 @@
         </button>
       </div>
     </form>
-    <p class='forgot' (click)="email=!email">
-      {{'Login.Forgot' | translate }}
+    <p class="forgot" (click)="email = !email">
+      {{ "Login.Forgot" | translate }}
       <span *ngIf="email">▲</span>
       <span *ngIf="!email">▼</span>
     </p>
-      <form [formGroup]="emailForm" *ngIf="email">
-        <p>{{'Login.Fill' | translate }}</p>
-        <div class="form-group inputs forgot-section">
-          <input
-            type="text"
-            placeholder="{{ 'Login.Email' | translate }}"
-            formControlName="email"
-            (keyup)="removeDoesntExist()"
-          />
-          <button class='send-email' (click)="sendEmail()" [disabled]="!emailForm.valid" [ngClass]="{'send-email-disabled': !emailForm.valid}">{{'Login.Send' | translate }}</button>           
-        </div>
-        <div *ngIf="emailForm.controls.email.errors?.email && !emailForm.controls.email.pristine" class='invalid-feedback'>
-          {{"Login.EmailInvalid" | translate}}
-        </div>
-        <span class="spacer"></span>
-      </form>
-      <p *ngIf="sent" class='forgot'>
-        {{"Login.CheckInbox" | translate}}
-      </p>
-      <p *ngIf="!exist" class='invalid-feedback'>
-        {{"Login.DoesntExist" | translate}}
-      </p>
+    <form [formGroup]="emailForm" *ngIf="email">
+      <p>{{ "Login.Fill" | translate }}</p>
+      <div class="form-group inputs forgot-section">
+        <input
+          type="text"
+          placeholder="{{ 'Login.Email' | translate }}"
+          formControlName="email"
+          (keyup)="removeDoesntExist()"
+        />
+        <button
+          class="send-email"
+          (click)="sendEmail()"
+          [disabled]="!emailForm.valid"
+          [ngClass]="{ 'send-email-disabled': !emailForm.valid }"
+        >
+          {{ "Login.Send" | translate }}
+        </button>
+      </div>
+      <div
+        *ngIf="
+          emailForm.controls.email.errors?.email &&
+          !emailForm.controls.email.pristine
+        "
+        class="invalid-feedback"
+      >
+        {{ "Login.EmailInvalid" | translate }}
+      </div>
+      <span class="spacer"></span>
+    </form>
+    <p *ngIf="sent" class="forgot">
+      {{ "Login.CheckInbox" | translate }}
+    </p>
+    <p *ngIf="!exist" class="invalid-feedback">
+      {{ "Login.DoesntExist" | translate }}
+    </p>
     <div class="confirm" *ngIf="popup">
       <h3 class="confirm-header">{{ serverMessage }}</h3>
     </div>

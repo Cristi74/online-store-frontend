@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -7,7 +7,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./product-details-dialog.component.scss'],
 })
 export class ProductDetailsDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ngOnInit() {}
+  darkTheme!: boolean;
+  ngOnInit() {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+  }
 }

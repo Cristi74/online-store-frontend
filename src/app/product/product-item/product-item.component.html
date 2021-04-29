@@ -1,7 +1,12 @@
 <div
-  [ngClass]="product.itemsInStock <= 0 ? 'product stockOut' : 'product'"
+  [ngClass]="{
+    'elevated-dark': darkTheme,
+    'product-light': !darkTheme,
+    stockOut: product.itemsInStock <= 0
+  }"
   *ngIf="product"
   [routerLink]="['/products/', product.id]"
+  class="product"
 >
   <div class="face front">
     <div class="outOfStock" *ngIf="product.itemsInStock <= 0">
@@ -19,7 +24,14 @@
     ></star-rating>
     <p>{{ product.price }} lei</p>
   </div>
-  <div class="face back">
+  <div
+    class="face back"
+    [ngClass]="{
+      'elevated-dark': darkTheme,
+      'product-light': !darkTheme,
+      stockOut: product.itemsInStock <= 0
+    }"
+  >
     <h2>{{ "ProductItem.Brand" | translate }}</h2>
     <h3>
       {{ product.brand | titlecase }}
