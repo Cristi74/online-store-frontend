@@ -35,6 +35,8 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   orderOptions = ['-', 'Price', 'Rating', 'Name', 'Brand'];
   descending = true;
   sortBy = '';
+  darkTheme!: boolean;
+  curentTheme!: string;
 
   callForProducts(): void {
     this.productServ
@@ -124,8 +126,8 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.descending = JSON.parse(sessionStorage.getItem('descending') || 'true');
     this.productServ
       .getProducts(
-        this.pageNumber, 
-        this.pageSize,  
+        this.pageNumber,
+        this.pageSize,
         (this.orderOptions.includes(this.sortBy)) ? this.sortBy.toLowerCase() : '',
         this.descending ? 'DESC' : 'ASC')
       .subscribe((products) => {
@@ -140,12 +142,12 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
   }
-
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      '#fafbfc';
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
   }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -159,5 +161,10 @@ export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sortBy = event.target.value;
     sessionStorage.setItem('sortBy', JSON.stringify(this.sortBy));
     this.callForProducts();
+  }
+  receive(event: any) {
+    this.curentTheme = event
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = this.curentTheme
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
   }
 }

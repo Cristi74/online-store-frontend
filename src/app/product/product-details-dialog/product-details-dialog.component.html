@@ -1,10 +1,12 @@
-<div class="modal">
+<div class="modal" [ngClass]="{ dark: darkTheme }">
   <h1>{{ "ProductDetailsDialog.Success" | translate }}</h1>
   <div class="product-modal">
-    <a mat-dialog-close id="continue" routerLink="/"> < {{ "ProductDetailsDialog.ContinueShopping" | translate }}</a>
+    <a mat-dialog-close id="continue" routerLink="/">
+      < {{ "ProductDetailsDialog.ContinueShopping" | translate }}</a
+    >
     <app-product-item id="product" [product]="data"></app-product-item>
-    <a routerLink="/cart" mat-dialog-close id="checkout-cart"
-      > {{ "ProductDetailsDialog.GoToCart" | translate }}></a
+    <a routerLink="/cart" mat-dialog-close id="checkout-cart">
+      {{ "ProductDetailsDialog.GoToCart" | translate }}></a
     >
   </div>
 </div>

@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   success = 0;
   emailExists: any;
   usernameExists: any;
+  darkTheme!: boolean;
+
 
   submit() {
     this.user.firstName = this.f.firstName.value;
@@ -79,6 +81,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.form = this.formBuilder.group({
       sex: '',
       firstName: ['', Validators.required],

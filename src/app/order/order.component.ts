@@ -28,6 +28,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
   section = 1;
   confirm = false;
   transportFee = environment.transportFee;
+  darkTheme!: boolean;
+  curentTheme!: string;
+
   constructor(
     private orderService: OrderService,
     private router: Router,
@@ -89,15 +92,24 @@ export class OrderComponent implements OnInit, AfterViewInit {
     )
   }
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      '#fafbfc';
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
   }
   changeSection(sect: any, event: any) {
     this.section = sect;
     event.stopPropagation();
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
   }
   hidePaypal(currency: string) {
     currency === "RON" ? this.isHidden = true : this.isHidden = false;
     this.payCurrency = currency;
+  }
+  receive(event: any) {
+    this.curentTheme = event
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = this.curentTheme
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    console.log(this.darkTheme, this.curentTheme)
   }
 }

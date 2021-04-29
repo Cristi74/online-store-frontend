@@ -26,6 +26,8 @@ export class CartComponent implements OnInit, AfterViewInit {
     private router: Router,
     private productService: ProductService
   ) { }
+  darkTheme!: boolean;
+  curentTheme!: string;
 
   ngOnInit(): void {
     this.user = this.accountService.userValue;
@@ -49,8 +51,10 @@ export class CartComponent implements OnInit, AfterViewInit {
     }
   }
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      '#fafbfc';
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
   }
   deleteFromCart(id: any) {
     this.products = this.products.filter((product: any) => product.id !== id);
@@ -86,5 +90,10 @@ export class CartComponent implements OnInit, AfterViewInit {
         state: { redirect: this.router.url },
       });
     else this.router.navigate(['order']);
+  }
+  receive(event: any) {
+    this.curentTheme = event
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = this.curentTheme
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
   }
 }

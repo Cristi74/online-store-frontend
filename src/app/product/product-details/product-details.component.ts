@@ -1,7 +1,7 @@
 import { Product } from './../../models/product';
 import { ProductDetailsDialogComponent } from './../product-details-dialog/product-details-dialog.component';
 import { CartService } from './../../../services/cart.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/services/product.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,13 +13,14 @@ import { first } from 'rxjs/operators';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private productServ: ProductService,
     private cartService: CartService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private elementRef: ElementRef
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -33,6 +34,8 @@ export class ProductDetailsComponent implements OnInit {
   id = this.route.snapshot.params.id;
   qty = 1;
   outOfStock: boolean = false;
+  darkTheme!: boolean;
+  curentTheme!: string;
 
   addToCart() {
     this.cartService.currentCart.pipe(first()).subscribe((res) => {
@@ -98,5 +101,16 @@ export class ProductDetailsComponent implements OnInit {
       (this.product.itemsInStock <= 0) ? this.outOfStock = true : null;
       this.handleHistory(product);
     });
+  }
+  ngAfterViewInit() {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
+  }
+  receive(event: any) {
+    this.curentTheme = event
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = this.curentTheme
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
   }
 }

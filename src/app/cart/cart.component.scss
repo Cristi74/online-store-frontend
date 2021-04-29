@@ -1,5 +1,7 @@
-a {
+.a-light {
   color: black;
+}
+a {
   text-decoration: none;
 }
 a:hover {
@@ -14,7 +16,6 @@ a:hover {
   height: fit-content;
   margin: 3rem 3rem 3rem 1.5rem;
   padding: 2rem;
-  background-color: white;
   position: fixed;
   left: 70%;
   min-width: 20%;
@@ -35,7 +36,6 @@ a:hover {
   height: fit-content;
   margin: 3rem 1.5rem 3rem 3rem;
   padding: 2rem;
-  background-color: white;
 }
 .empty-cart-container {
   max-width: 100%;
@@ -44,10 +44,10 @@ a:hover {
   flex-direction: column;
 }
 .empty {
-  background-color: white;
-  width: 90vw;
-  margin: 3rem 1.5rem 3rem 3rem;
+  width: 80%;
+  margin: 3rem auto;
   padding: 2rem;
+  text-align: center;
 }
 .order-button,
 .back-button {
@@ -108,8 +108,10 @@ a:hover {
   padding-left: 2rem;
   min-width: 7rem;
 }
-.quantity-buttons {
+.quantity-buttons-light {
   background-color: white;
+}
+.quantity-buttons {
   border: none;
   vertical-align: middle;
   font-size: 1.6rem;

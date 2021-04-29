@@ -1,17 +1,19 @@
 import { User } from 'src/app/models/user';
 import { AccountService } from './../../services/account.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss'],
 })
-export class UserDetailsComponent implements OnInit, OnDestroy {
+export class UserDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
+  constructor(private elementRef: ElementRef,
+    private accountService: AccountService) {
+  }
   user!: User;
   newUser = JSON.parse('{ }');
   userLogo: any;
-  constructor(private accountService: AccountService) { }
   accountName = true;
   accountPassword = true;
   accountAddress = true;
@@ -26,6 +28,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   confirm = false;
   interval: any;
   order: any;
+  darkTheme!: boolean;
+  curentTheme!: boolean;
 
   enableNameForm() {
     this.accountName = !this.accountName;
@@ -76,7 +80,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   receiveSectionChangeFromMyOrder($event: any) {
     this.detailsOption = 4;
-    this.order=$event;
+    this.order = $event;
   }
   receiveSectionChangeFromOrderItem($event: any) {
     this.detailsOption = $event;
@@ -91,6 +95,18 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.user = { ...this.newUser, password: '' };
     delete this.user.token;
   }
+  ngAfterViewInit() {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
+  }
+  receive(event: any) {
+    this.curentTheme = event
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = this.curentTheme
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+  }
+
   ngOnDestroy() {
     if ((this, this.interval)) {
       clearInterval(this.interval);

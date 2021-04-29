@@ -1,10 +1,12 @@
 @import "~@angular/material/theming";
 
+.header-light {
+  background-color: #fafbfc;
+}
 .header {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: white;
   z-index: 1;
   margin: 0;
   overflow: hidden;
@@ -12,7 +14,6 @@
 .navbar {
   max-width: 100%;
   height: 60px;
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,6 +30,7 @@
     object-fit: contain;
     height: 60px;
     cursor: pointer;
+    // z-index: -1;
   }
   img:focus {
     outline: none;
@@ -41,17 +43,17 @@
     width: 50%;
     margin-right: 20px;
     input {
-      width: 95%;
+      width: 100%;
       height: 25px;
       border: 0;
       outline: 0;
-      margin-left: 5px;
+      border-radius: 8px 0 0 8px;
     }
     input:focus {
       outline: none;
     }
     .search-icon {
-      margin-right: 5px;
+      margin: 0 5px;
     }
   }
 
@@ -66,7 +68,9 @@
       text-decoration: none;
       display: flex;
       align-items: center;
-      color: #3b383d;
+    }
+    .aColor {
+      color: #000;
     }
   }
 }
@@ -84,9 +88,10 @@
     #634fbd
   );
 }
-
-.example-list {
+.example-list-light {
   background-color: #fafbfc;
+}
+.example-list {
   z-index: 2;
   list-style-type: none;
   width: 150px;
@@ -111,7 +116,7 @@
   }
   .view-user-details {
     text-decoration: none;
-    color: black;
+    // color: black;
     margin-bottom: 20px;
     border-top: 1px solid black;
     padding-top: 15px;
@@ -141,6 +146,9 @@
     }
     .nav-options {
       width: 95%;
+    }
+    .moon-sun {
+      grid-row-start: 1;
     }
     .search {
       grid-row-start: 2;
