@@ -30,6 +30,7 @@ export class CartComponent implements OnInit, AfterViewInit {
   curentTheme!: string;
 
   ngOnInit(): void {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.user = this.accountService.userValue;
     this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
     if (Object.keys(this.cart).length > 0) {
@@ -51,7 +52,6 @@ export class CartComponent implements OnInit, AfterViewInit {
     }
   }
   ngAfterViewInit() {
-    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     this.darkTheme ?
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
       : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
