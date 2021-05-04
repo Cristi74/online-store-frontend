@@ -1,13 +1,13 @@
-<app-navbar></app-navbar>
-<div class="confirm" *ngIf="success==0">
+<app-navbar  (curentTheme)="receive($event)"></app-navbar>
+<div class="confirm" [ngClass]="darkTheme ? 'dark': 'confirm-light'" *ngIf="success==0">
     <h3>{{ "PaymentSuccess.Pending" | translate }}</h3>
 </div>
-<div class="confirm" *ngIf="success==1">
+<div class="confirm" [ngClass]="darkTheme ? 'dark': 'confirm-light'" *ngIf="success==1">
     <mat-icon>check_circle_outline</mat-icon>
     <h3>{{ "PaymentSuccess.Succes Order" | translate }}</h3>
     <h2>{{ "PaymentSuccess.Thank you" | translate }}</h2>
 </div>
-<div class="confirm red" *ngIf="success==2">
+<div class="confirm red" [ngClass]="darkTheme ? 'dark': 'confirm-light'" *ngIf="success==2">
     <mat-icon>do_not_disturb</mat-icon>
     <h3>{{ "PaymentSuccess.Wrong" | translate }}</h3>
     <h2>{{ "PaymentSuccess.BackTo" | translate }}</h2>

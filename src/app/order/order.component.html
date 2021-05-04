@@ -127,7 +127,7 @@
       </div>
     </div>
   </div>
-  <div class="confirm" *ngIf="confirm == true">
+  <div class='confirm' [ngClass]="darkTheme ? 'dark': 'confirm-light'"  *ngIf="confirm == true">
     <mat-icon>check_circle_outline</mat-icon>
     <h3>{{ "Order.Succes Order" | translate }}</h3>
     <h2>{{ "Order.Thank you" | translate }}</h2>
