@@ -1,7 +1,7 @@
 import { CartService } from './../../services/cart.service';
 import { ProductService } from 'src/services/product.service';
 import { OrderService } from 'src/services/order.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,17 +9,20 @@ import { Router } from '@angular/router';
   templateUrl: './payment-success.component.html',
   styleUrls: ['./payment-success.component.scss'],
 })
-export class PaymentSuccessComponent implements OnInit {
+export class PaymentSuccessComponent implements OnInit, AfterViewInit {
   cart!: any;
   success= 0;
   itemsProcessed=0;
+  darkTheme!: boolean;
+  curentTheme!: string;
   constructor(
+    private elementRef: ElementRef,
     private orderService: OrderService,
     private productService: ProductService,
     private router: Router,
     private cartService: CartService
   ) {}
-
+ 
   ngOnInit(): void {
     this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
     let order = Object();
@@ -59,5 +62,16 @@ export class PaymentSuccessComponent implements OnInit {
         }),
       );
     }
+  }
+  receive(event: any) {
+    this.curentTheme = event
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = this.curentTheme
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+  }
+  ngAfterViewInit() {
+    this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
+    this.darkTheme ?
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#3d3c3c"
+      : this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fafbfc';
   }
 }

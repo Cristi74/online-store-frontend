@@ -133,6 +133,7 @@
   </div>
   <div
     class="confirm"
+    [ngClass]="darkTheme ? 'dark': 'confirm-light'"
     *ngIf="success == 2"
     [style.visibility]="dialogVisibility ? 'visible' : 'hidden'"
   >

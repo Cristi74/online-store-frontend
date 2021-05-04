@@ -8,7 +8,6 @@
     padding: 3rem;
     min-width: 40%;
     text-align: center;
-    background-color: white;
     border-radius: 2%;
     border: 2px solid #56c465;
     .mat-icon {
@@ -38,4 +37,7 @@
   }
   button:active:focus {
     outline: none;
+  }
+  .confirm-light{
+    background-color: white;
   }
