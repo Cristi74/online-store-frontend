@@ -1,5 +1,4 @@
 import { CreateUser } from './../../models/createUser';
-import { User } from './../../models/user';
 import { CartService } from './../../../services/cart.service';
 import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,6 +9,11 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 
 import { AccountService } from '../../../services/account.service';
 import { of } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
+
+const googleLogoURL =
+  "https://raw.githubusercontent.com/fireflysemantics/logo/master/Google.svg";
 
 @Component({
   templateUrl: 'login.component.html',
@@ -32,7 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   darkTheme!: boolean;
   user!: SocialUser;
   loggedIn!: boolean;
-  userApp: CreateUser= new CreateUser();
+  userApp: CreateUser = new CreateUser();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,8 +44,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     public accountService: AccountService,
     private elementRef: ElementRef,
     private cartService: CartService,
-    private authService: SocialAuthService
-  ) { }
+    private authService: SocialAuthService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      "logo",
+      this.domSanitizer.bypassSecurityTrustResourceUrl(googleLogoURL));
+  }
 
   ngOnInit() {
     this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
@@ -62,10 +72,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
     this.authService.authState.subscribe((user) => {
       this.userApp.firstName = user.firstName;
-      this.userApp.lastName=user.lastName;
-      this.userApp.email=user.email;
-      this.userApp.token=user.authToken;
-      this.userApp.username=user.id
+      this.userApp.lastName = user.lastName;
+      this.userApp.email = user.email;
+      this.userApp.token = user.authToken;
+      this.userApp.username = user.id
       this.loggedIn = (user != null);
       console.log(this.userApp);
       console.log(user);

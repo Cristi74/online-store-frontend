@@ -78,9 +78,15 @@
           {{ "Login.Login" | translate }}
         </button>
         <h4>{{ "Login.Connect" | translate }}</h4>
-        <div class='social'>
-          <button class='fb' (click)="signInWithFB()"> <mat-icon [ngStyle]="{'color':'white'}">facebook</mat-icon> {{ "Login.Continue" | translate }} Facebook</button>
-          <button (click)="signInWithGoogle()">google</button>
+        <div class="social">
+          <button class="fb" (click)="signInWithFB()">
+            <mat-icon [ngStyle]="{ color: 'white' }">facebook</mat-icon>
+            {{ "Login.Continue" | translate }} Facebook
+          </button>
+          <button mat-button class="fb" (click)="signInWithGoogle()">
+            <mat-icon svgIcon="logo"></mat-icon>
+            {{ "Login.Continue" | translate }} Google
+          </button>
         </div>
         <h4>{{ "Login.Or" | translate }}</h4>
         <button routerLink="../register" class="btn btn-link buttons">

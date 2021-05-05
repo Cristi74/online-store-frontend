@@ -33,6 +33,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
+import { MatButtonModule } from '@angular/material/button';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -63,6 +64,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     RatingModule,
     SocialLoginModule,
+    MatButtonModule,
     [HttpClientModule],
     OverlayModule,
     TranslateModule.forRoot({
