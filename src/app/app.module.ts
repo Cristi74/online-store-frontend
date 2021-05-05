@@ -28,6 +28,11 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
 import { LanguageInterceptor } from './interceptors/language-interceptor';
 import { PaymentFailureComponent } from './payment-failure/payment-failure.component';
 import { AccountModule } from './account/account.module';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
@@ -57,6 +62,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     RatingModule,
+    SocialLoginModule,
     [HttpClientModule],
     OverlayModule,
     TranslateModule.forRoot({
@@ -80,6 +86,24 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       multi: true,
     },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '478324556921-usrt6dcims5d9pn6foqpp5rfe9ose3re.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('192048276070498')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent],
   exports: [NavbarComponent, TranslateModule, AccountModule],

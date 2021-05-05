@@ -94,7 +94,9 @@
         "Send": "Send",
         "EmailInvalid": "Email doesn't look right.",
         "CheckInbox": "Check yout inbox",
-        "DoesntExist": "Email not registered"
+        "DoesntExist": "Email not registered", 
+        "Connect": "Connect with",
+        "Continue": "Continue with"
     },
     "New password": {
         "New password": "New password",

@@ -1,11 +1,15 @@
+import { CreateUser } from './../../models/createUser';
+import { User } from './../../models/user';
 import { CartService } from './../../../services/cart.service';
 import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError, first } from 'rxjs/operators';
+import { SocialAuthService, SocialUser } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 import { AccountService } from '../../../services/account.service';
-import { from, of } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -26,13 +30,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
   popup = false;
   email = false;
   darkTheme!: boolean;
+  user!: SocialUser;
+  loggedIn!: boolean;
+  userApp: CreateUser= new CreateUser();
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     public accountService: AccountService,
     private elementRef: ElementRef,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: SocialAuthService
   ) { }
 
   ngOnInit() {
@@ -51,6 +59,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
     this.emailForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
+    });
+    this.authService.authState.subscribe((user) => {
+      this.userApp.firstName = user.firstName;
+      this.userApp.lastName=user.lastName;
+      this.userApp.email=user.email;
+      this.userApp.token=user.authToken;
+      this.userApp.username=user.id
+      this.loggedIn = (user != null);
+      console.log(this.userApp);
+      console.log(user);
+      //and post to BE
     });
   }
 
@@ -144,5 +163,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
     const { redirect } = window.history.state;
     if (redirect == '/cart') this.router.navigateByUrl('/order');
     else this.router.navigateByUrl(redirect || '/');
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
   }
 }

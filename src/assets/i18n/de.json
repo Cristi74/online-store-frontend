@@ -94,7 +94,9 @@
         "Send": "Senden",
         "EmailInvalid": "Ungültige E-Mail-Adresse.",
         "CheckInbox": "E-Mail überprüfen",
-        "DoesntExist": "E-Mail nicht registriert"
+        "DoesntExist": "E-Mail nicht registriert",
+        "Connect": "Verbinden mit",
+        "Continue": "Weitermachen mit"
     },
     "New password": {
         "New password": "Neues Passwort",

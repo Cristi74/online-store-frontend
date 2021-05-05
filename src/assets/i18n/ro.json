@@ -94,7 +94,9 @@
         "Send": "Trimite",
         "EmailInvalid": "Email invalid.",
         "CheckInbox": "Verifica adresa de email",
-        "DoesntExist": "Emailul nu exista in baza de date"
+        "DoesntExist": "Emailul nu exista in baza de date",
+        "Connect": "Intra in cont cu",
+        "Continue": "Continua cu"
     },
     "New password": {
         "New password": "Schimbare parola",
