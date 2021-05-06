@@ -87,6 +87,7 @@
             <mat-icon svgIcon="logo"></mat-icon>
             {{ "Login.Continue" | translate }} Google
           </button>
+          <button (click)='signOut()'>social sign out</button>
         </div>
         <h4>{{ "Login.Or" | translate }}</h4>
         <button routerLink="../register" class="btn btn-link buttons">

@@ -71,15 +71,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
       email: ['', [Validators.required, Validators.email]],
     });
     this.authService.authState.subscribe((user) => {
-      this.userApp.firstName = user.firstName;
-      this.userApp.lastName = user.lastName;
-      this.userApp.email = user.email;
-      this.userApp.token = user.authToken;
-      this.userApp.username = user.id
-      this.loggedIn = (user != null);
-      console.log(this.userApp);
-      console.log(user);
-      //and post to BE
+      if(user)
+        {this.userApp.firstName = user.firstName;
+        this.userApp.lastName = user.lastName;
+        this.userApp.email = user.email;
+        this.userApp.token = user.authToken;
+        this.userApp.username = user.id
+        this.loggedIn = (user != null);
+        this.accountService.loginSocial(this.userApp).subscribe();}
     });
   }
 
@@ -185,5 +184,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   signOut(): void {
     this.authService.signOut();
+    localStorage.removeItem('user');
   }
 }
