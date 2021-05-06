@@ -78,7 +78,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.userApp.token = user.authToken;
         this.userApp.username = user.id
         this.loggedIn = (user != null);
-        this.accountService.loginSocial(this.userApp).subscribe();}
+        if(user.provider=='FACEBOOK')
+          this.accountService.loginSocialFB(this.userApp).subscribe();
+        else
+        this.accountService.loginSocialGoogle(this.userApp).subscribe();
+      }
     });
   }
 

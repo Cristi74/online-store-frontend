@@ -124,10 +124,28 @@ export class AccountService {
     );
   }
 
-  loginSocial(user: any) {
+  loginSocialFB(user: any) {
     return this.http
       .post<any>(
         `${environment.apiUrl}/login/facebook`,
+        user,
+        { observe: 'response' as 'body' }
+      )
+      .pipe(
+        map((user) => {
+          let userM = user.body;
+          userM.token = user.headers.get('Authorization');
+          localStorage.setItem('user', JSON.stringify(userM));
+          this.userSubject.next(user.body);
+          return user;
+        })
+      );
+  }
+  
+  loginSocialGoogle(user: any) {
+    return this.http
+      .post<any>(
+        `${environment.apiUrl}/login/google`,
         user,
         { observe: 'response' as 'body' }
       )
