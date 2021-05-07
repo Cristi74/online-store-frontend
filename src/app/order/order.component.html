@@ -125,7 +125,7 @@
           [style.display]="section == 3 ? 'block' : 'none'"
           >forward</mat-icon
         >
-        <button (click)="placeOrder(); confirm = true">
+        <button (click)="placeOrder();">
           {{ "Order.Send Order" | translate }}
         </button>
         <mat-icon></mat-icon>
@@ -134,15 +134,25 @@
     </div>
   </div>
   <div
-    class="confirm"
+    class="confirm green"
     [ngClass]="darkTheme ? 'dark' : 'confirm-light'"
-    *ngIf="confirm == true"
+    *ngIf="confirm == true && address"
   >
     <mat-icon>check_circle_outline</mat-icon>
     <h3>{{ "Order.Succes Order" | translate }}</h3>
     <h2>{{ "Order.Thank you" | translate }}</h2>
   </div>
+  <div
+    class="confirm red"
+    [ngClass]="darkTheme ? 'dark' : 'confirm-light'"
+    *ngIf="confirm == true && !address"
+  >
+    <mat-icon>cancel</mat-icon>
+    <h3>{{ "Order.noAddress" | translate }}</h3>
+    <h2>{{ "Order.register" | translate }}</h2>
+  </div>
 </div>
+
 <div class="main container" *ngIf="products.length == 0">
   {{ "Order.Empty cart" | translate }}
 </div>

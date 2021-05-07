@@ -174,7 +174,9 @@
         "Thank you": "Multumim. ",
         "Empty cart": "Nu sunt produse in cos  ",
         "Currency": "Alege moneda",
-        "Payment methode": "Modalitate de plata"
+        "Payment methode": "Modalitate de plata",
+        "noAddress": "Contul tau nu are o adresa de livrare",
+        "register": "Te rugam sa adaugi o adresa in sectiunea Detalii utilizator"
     },
     "PaymentSuccess": {
         "Pending": "In curs de procesare",
