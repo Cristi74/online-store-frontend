@@ -84,7 +84,13 @@
       </div>
       <div class="space-between">
         <span class="price distance">{{ "Order.Shipping" | translate }} </span
-        ><span>{{ transportFee }} lei</span>
+        ><span>
+          {{
+            transportFee === 0
+              ? ("Cart.Free" | translate)
+              : transportFee + " lei"
+          }}
+        </span>
       </div>
       <h2></h2>
       <div class="space-between">
@@ -127,7 +133,11 @@
       </div>
     </div>
   </div>
-  <div class='confirm' [ngClass]="darkTheme ? 'dark': 'confirm-light'"  *ngIf="confirm == true">
+  <div
+    class="confirm"
+    [ngClass]="darkTheme ? 'dark' : 'confirm-light'"
+    *ngIf="confirm == true"
+  >
     <mat-icon>check_circle_outline</mat-icon>
     <h3>{{ "Order.Succes Order" | translate }}</h3>
     <h2>{{ "Order.Thank you" | translate }}</h2>

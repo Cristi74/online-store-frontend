@@ -94,7 +94,9 @@
         "Send": "Senden",
         "EmailInvalid": "Ungültige E-Mail-Adresse.",
         "CheckInbox": "E-Mail überprüfen",
-        "DoesntExist": "E-Mail nicht registriert"
+        "DoesntExist": "E-Mail nicht registriert",
+        "Connect": "Verbinden mit",
+        "Continue": "Weitermachen mit"
     },
     "New password": {
         "New password": "Neues Passwort",
@@ -152,7 +154,8 @@
         "Next Step": "Nächster Schritt",
         "Continue shopping": "Mit dem Einkaufen fortfahren",
         "Cart is empty": "Einkaufswagen ist leer",
-        "Out of stock": "Nicht vorrättig"
+        "Out of stock": "Nicht vorrättig",
+        "Free": "kostenlos"
     },
     "Order": {
         "Order review": "Bestellüberprüfung",

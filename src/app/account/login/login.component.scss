@@ -13,7 +13,7 @@
   flex-direction: column;
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   h2 {
@@ -140,4 +140,25 @@
 body {
   margin: 5% auto;
   max-height: 90%;
+}
+.fb {
+  font-family: Lucida Grande, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.3rem 0.3rem 0.3rem 0;
+  background: #1877f2;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+.mat-icon {
+  font-size: 1.6rem;
+  vertical-align: middle;
+  fill: white;
+}
+.social {
+  display: flex;
+  flex-direction: column;
 }
