@@ -158,12 +158,24 @@ body {
   min-width: 40%;
   text-align: center;
   border-radius: 2%;
-  border: 2px solid #56c465;
   .mat-icon {
     font-size: 3rem;
     color: #56c465;
   }
 }
+.green{
+  .mat-icon {
+    color: #56c465;
+  }
+  border: 2px solid #56c465;
+}
+.red{
+  .mat-icon {
+    color: red;
+  }
+  border: 2px solid red;
+}
+
 .confirm-light{
   background-color: white;
 }

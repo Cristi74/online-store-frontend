@@ -4,6 +4,7 @@
     border-right: none;
     min-width: 100%;
     overflow: scroll;
+    font-size: 1.1rem;
     .user-name {
       max-width: fit-content;
       padding: 0.5rem;
@@ -174,4 +175,7 @@ mat-icon {
     color: #56c465;
     margin: 0 5px 30px 0;
   }
+}
+input{
+  font-size: 1.1rem;
 }

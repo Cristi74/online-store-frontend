@@ -46,6 +46,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.user.password = this.newUser.password;
     }
     this.accountService.userUpdate(this.user.id, this.user).subscribe();
+    localStorage.setItem('user', JSON.stringify(this.user));
     this.confirm = true;
     this.interval = setInterval(() => {
       this.confirm = false;
@@ -72,6 +73,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.user.password = this.newUser.password;
     }
     this.accountService.userUpdate(this.user.id, this.user).subscribe();
+    localStorage.setItem('user', JSON.stringify(this.user));
     this.confirm = true;
     this.interval = setInterval(() => {
       this.confirm = false;
@@ -94,7 +96,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.newUser.firstName[0].toUpperCase() +
         this.newUser.lastName[0].toUpperCase();
     this.user = { ...this.newUser, password: '' };
-    delete this.user.token;
   }
   ngAfterViewInit() {
     this.darkTheme ?

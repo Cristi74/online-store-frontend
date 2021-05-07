@@ -27,6 +27,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   isHidden = false;
   section = 1;
   confirm = false;
+  address=true;
   transportFee = environment.transportFee;
   darkTheme!: boolean;
   curentTheme!: string;
@@ -64,19 +65,29 @@ export class OrderComponent implements OnInit, AfterViewInit {
     order['orderValue'] = this.orderValue;
     order['orderedProducts'] = this.orderObject;
     order['userId'] = this.user.id;
-    this.orderService.postOrder(order).subscribe(
-      (response: Response) => {
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 3000);
-        localStorage.removeItem('cart');
-        this.cartService.deleteCart(this.cart.id).subscribe();
-        this.cartService.update({});
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    if(this.user.addressEntity.address!='' && this.user.addressEntity.city!='') 
+      this.orderService.postOrder(order).subscribe(
+        (response: Response) => {
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 3000);
+          localStorage.removeItem('cart');
+          this.cartService.deleteCart(this.cart.id).subscribe();
+          this.cartService.update({});
+          this.confirm=true;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    else {
+      this.address=false;
+      this.confirm=true;
+      setTimeout(() => {
+        this.confirm=false;
+        this.router.navigate(['/account/details'])
+      }, 3000);
+    }
   }
   payPall() {
     let pay = Object();

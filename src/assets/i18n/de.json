@@ -174,7 +174,9 @@
         "Thank you": "Danke. ",
         "Empty cart": "Keine Produkte im Warenkorb  ",
         "Currency": "Währung wählen",
-        "Payment methode": "Zahlungsmethode"
+        "Payment methode": "Zahlungsmethode",
+        "noAddress": "Ihr Konto enthält keine Adresse",
+        "register": "Bitte fügen Sie eine aus dem Abschnitt Benutzerdetails hinzu"
     },
     "PaymentSuccess": {
         "Pending": "Steht aus",
