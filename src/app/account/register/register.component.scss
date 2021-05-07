@@ -28,7 +28,7 @@
     width: 50%;
     height: 2.5rem;
     margin: 5px auto;
-    border-radius: 3%;
+    border-radius: 8px;
     border: none;
     font-size: 1.5rem;
   }
@@ -36,7 +36,7 @@
     width: 50%;
     height: 2.5rem;
     margin: 5px auto;
-    border-radius: 3%;
+    border-radius: 8px;
     border: none;
     font-size: 1.5rem;
   }
@@ -57,7 +57,7 @@
   }
   .inputs {
     border: 1px solid #979292;
-    border-radius: 3%;
+    border-radius: 8px;
     overflow: hidden;
     display: flex;
     margin-bottom: 1rem;
@@ -79,7 +79,7 @@
   padding: 3rem;
   min-width: 40%;
   text-align: center;
-  border-radius: 2%;
+  border-radius: 15px;
   border: 2px solid #56c465;
   .mat-icon {
     font-size: 3rem;

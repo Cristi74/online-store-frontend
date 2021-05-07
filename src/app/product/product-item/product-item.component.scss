@@ -19,7 +19,6 @@
   position: relative;
   transform-style: preserve-3d;
   transition: transform 2s;
-  // transform: rotateY(180deg);
   @include mat-elevation(6);
 }
 .stockOut {

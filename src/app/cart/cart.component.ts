@@ -31,7 +31,7 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
-    this.user = this.accountService.userValue;
+    this.user = JSON.parse(localStorage.getItem('user')!);
     this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
     if (Object.keys(this.cart).length > 0) {
       if (this.cart.products != null) {
