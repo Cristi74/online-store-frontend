@@ -5,6 +5,7 @@ import { CartService } from './../../services/cart.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { SocialAuthService } from 'angularx-social-login';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
     private cartService: CartService,
     private searchService: SearchService,
     private router: Router,
+    private authService: SocialAuthService,
     public translate: TranslateService
   ) {
     translate.addLangs(['ro', 'en', 'de']);
@@ -50,12 +52,17 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('user');
     localStorage.removeItem('cart');
     this.cartService.update({});
+    this.signOut();
     this.userOptions = false;
     localStorage.hasOwnProperty('user')
       ? (this.userLogged = true)
       : (this.userLogged = false);
     this.router.navigate(['/']);
   }
+  signOut(): void {
+    this.authService.signOut();
+  }
+
   ngOnInit() {
     localStorage.hasOwnProperty('user')
       ? (this.userLogged = true)

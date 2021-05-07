@@ -1,10 +1,10 @@
+import { User } from 'src/app/models/user';
 import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { User } from '../app/models/user';
+import { CreateUser } from 'src/app/models/createUser';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -123,4 +123,41 @@ export class AccountService {
       newPassword
     );
   }
+
+  loginSocialFB(user: any) {
+    return this.http
+      .post<any>(
+        `${environment.apiUrl}/login/facebook`,
+        user,
+        { observe: 'response' as 'body' }
+      )
+      .pipe(
+        map((user) => {
+          let userM = user.body;
+          userM.token = user.headers.get('Authorization');
+          localStorage.setItem('user', JSON.stringify(userM));
+          this.userSubject.next(user.body);
+          return user;
+        })
+      );
+  }
+  
+  loginSocialGoogle(user: any) {
+    return this.http
+      .post<any>(
+        `${environment.apiUrl}/login/google`,
+        user,
+        { observe: 'response' as 'body' }
+      )
+      .pipe(
+        map((user) => {
+          let userM = user.body;
+          userM.token = user.headers.get('Authorization');
+          localStorage.setItem('user', JSON.stringify(userM));
+          this.userSubject.next(user.body);
+          return user;
+        })
+      );
+  }
+
 }
