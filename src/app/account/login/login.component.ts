@@ -71,17 +71,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
       email: ['', [Validators.required, Validators.email]],
     });
     this.authService.authState.subscribe((user) => {
-      if(user)
-        {this.userApp.firstName = user.firstName;
+      if (user) {
+        this.userApp.firstName = user.firstName;
         this.userApp.lastName = user.lastName;
         this.userApp.email = user.email;
         this.userApp.token = user.authToken;
         this.userApp.username = user.id
         this.loggedIn = (user != null);
-        if(user.provider=='FACEBOOK')
-          this.accountService.loginSocialFB(this.userApp).subscribe();
-        else
-        this.accountService.loginSocialGoogle(this.userApp).subscribe();
       }
     });
   }
@@ -102,16 +98,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       .pipe(first())
       .subscribe(
         (response: Response) => {
-          this.cartService
-            .getCart()
-            .pipe(catchError((err) => of([])))
-            .subscribe(
-              (res) => {
-                this.cartService.mergeCarts(res);
-              },
-              (err) => console.log('HTTP Error', err),
-              () => console.log('HTTP request completed.')
-            );
+          this.addCart();
           this.backToPreviousPage();
         },
         (error) => {
@@ -134,6 +121,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.submitted = false;
           this.loading = false;
         }
+      );
+  }
+
+  addCart() {
+    this.cartService
+      .getCart()
+      .pipe(catchError((err) => of([])))
+      .subscribe(
+        (res) => {
+          this.cartService.mergeCarts(res);
+        },
+        (err) => console.log('HTTP Error', err),
+        () => console.log('HTTP request completed.')
       );
   }
 
@@ -179,15 +179,33 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((res) => {
+        console.log(res);
+        this.accountService.loginSocialGoogle(this.userApp).subscribe();
+        this.refreshToken();
+      }).catch((err) => console.error(err)).finally(() => {
+        setTimeout(() => {
+          this.addCart();
+          this.backToPreviousPage()
+        }, 2000);
+      });
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then((res) => {
+        console.log(res);
+        this.accountService.loginSocialFB(this.userApp).subscribe()
+      }).catch((err) => console.error(err)).finally(() => {
+        setTimeout(() => {
+          this.addCart();
+          this.backToPreviousPage()
+        }, 2000);
+      });
   }
 
-  signOut(): void {
-    this.authService.signOut();
-    localStorage.removeItem('user');
+  refreshToken(): void {
+    this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID)
   }
 }

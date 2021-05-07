@@ -94,7 +94,7 @@
         "Send": "Send",
         "EmailInvalid": "Email doesn't look right.",
         "CheckInbox": "Check yout inbox",
-        "DoesntExist": "Email not registered", 
+        "DoesntExist": "Email not registered",
         "Connect": "Connect with",
         "Continue": "Continue with"
     },
@@ -154,7 +154,8 @@
         "Next Step": "Next Step",
         "Continue shopping": "Continue shopping",
         "Cart is empty": "Cart is empty",
-        "Out of stock": "Out of stock"
+        "Out of stock": "Out of stock",
+        "Free": "free"
     },
     "Order": {
         "Order review": "Order review",

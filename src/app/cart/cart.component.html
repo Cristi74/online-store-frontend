@@ -84,7 +84,11 @@
     </div>
     <div class="calculation-body line">
       <p class="space-between">{{ "Cart.Shipping" | translate }}</p>
-      <p>{{ transportFee }} lei</p>
+      <p>
+        {{
+          transportFee === 0 ? ("Cart.Free" | translate) : transportFee + " lei"
+        }}
+      </p>
     </div>
     <div class="calculation-body margin2">
       <h2 class="space-between">{{ "Cart.Total" | translate }}</h2>
