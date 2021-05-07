@@ -6,14 +6,14 @@
   padding: 2%;
   max-width: 55%;
   min-width: fit-content;
-  border-radius: 2%;
+  border-radius: 15px;
   display: flex;
   align-self: center;
   align-items: center;
   flex-direction: column;
   margin: 0;
   position: absolute;
-  top: 65%;
+  top: 61%;
   left: 50%;
   transform: translate(-50%, -50%);
   h2 {
@@ -30,14 +30,19 @@
     height: 2rem;
     outline: none;
     border: none;
-    width: 89%;
+    min-width: 87%;
+    max-width: 89%;
+    border-radius: 5px 0 0 5px;
+    padding: 0;
+    margin: 0;
+    padding-left: 5px;
   }
   .buttons {
     background-image: linear-gradient(to right, #5fd4d2, #634fbd 40%);
     color: white;
     min-width: 60vmin;
     min-height: 2rem;
-    border-radius: 3%;
+    border-radius: 5px;
     border: none;
     font-size: 1.2rem;
     align-self: center;
@@ -49,12 +54,16 @@
     cursor: pointer;
   }
   .inputs {
-    border: 1px solid #979292;
-    border-radius: 3%;
+    border: 1px outset #979292;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: nowrap;
     overflow: hidden;
     width: 100%;
     min-width: 60vmin;
     padding: 0;
+    height: 2rem;
+    margin: 0;
   }
   .inputs:focus-within {
     @include mat-elevation(2);
@@ -93,8 +102,9 @@
   }
   mat-icon {
     vertical-align: middle;
+    align-self: center;
     color: #817e7e;
-    padding: 0 0.6rem;
+    padding: 0 2%;
     cursor: pointer;
   }
   h4 {

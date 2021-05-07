@@ -95,16 +95,22 @@
   z-index: 2;
   list-style-type: none;
   width: 150px;
-  padding-bottom: 30px;
+  padding-top: 8px;
   height: 150px;
   border-radius: 5px;
+  @include mat-elevation(6);
   h3 {
     font-weight: 700;
   }
   .user-name {
     margin-top: -20px;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     padding-left: 10px;
+  }
+  .user-name-separator {
+    border-bottom: 1px solid black;
+    width: 70%;
+    margin-bottom: 5px;
   }
   .signout-btn {
     background-image: linear-gradient(to left, #5fd4d2, #634fbd 50%);
@@ -116,10 +122,7 @@
   }
   .view-user-details {
     text-decoration: none;
-    // color: black;
     margin-bottom: 20px;
-    border-top: 1px solid black;
-    padding-top: 15px;
   }
 }
 .language-selector-p {
