@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   user!: SocialUser;
   loggedIn!: boolean;
   userApp: CreateUser = new CreateUser();
+  valueUser!: string;
+  valuePass!: string;
 
   constructor(
     private formBuilder: FormBuilder,

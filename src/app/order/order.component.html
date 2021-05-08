@@ -122,10 +122,10 @@
         <mat-icon
           class="reverse"
           (click)="changeSection(2, $event)"
-          [style.display]="section == 3 ? 'block' : 'none'"
+          [style.visibility]="section == 3 ? 'visible' : 'hidden'"
           >forward</mat-icon
         >
-        <button (click)="placeOrder();">
+        <button (click)="placeOrder()">
           {{ "Order.Send Order" | translate }}
         </button>
         <mat-icon></mat-icon>
