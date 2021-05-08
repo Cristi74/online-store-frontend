@@ -53,6 +53,10 @@
     transform: translate(-50%, -50%);
     cursor: pointer;
   }
+  .non-button {
+    border: none;
+    background-color: transparent;
+  }
   .inputs {
     border: 1px outset #979292;
     border-radius: 5px;
@@ -64,6 +68,9 @@
     padding: 0;
     height: 2rem;
     margin: 0;
+  }
+  input::-webkit-input-placeholder {
+    color: #817e7e;
   }
   .inputs:focus-within {
     @include mat-elevation(2);
