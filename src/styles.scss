@@ -31,9 +31,15 @@ button:focus {
   color: #0059ff;
 }
 .elevated-dark {
-  background-color: #242222;
+  background-color: #130e0e;
   color: #ffffff;
 }
 .colorForDark {
   color: #0059ff;
+}
+.custom-modalbox .mat-dialog-container {
+  background-color: #3d3c3c;
+  @include mat-elevation(5);
+  padding: 15px 15px 24px;
+  border-radius: 8px;
 }

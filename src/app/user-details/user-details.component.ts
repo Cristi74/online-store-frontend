@@ -1,6 +1,7 @@
 import { User } from 'src/app/models/user';
 import { AccountService } from './../../services/account.service';
 import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef } from '@angular/core';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-user-details',
@@ -8,8 +9,10 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef } from '@angula
   styleUrls: ['./user-details.component.scss'],
 })
 export class UserDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
-  constructor(private elementRef: ElementRef,
-    private accountService: AccountService) {
+  constructor(
+    private elementRef: ElementRef,
+    private accountService: AccountService,
+  ) {
   }
   user!: User;
   newUser = JSON.parse('{ }');

@@ -183,28 +183,30 @@ export class LoginComponent implements OnInit, AfterViewInit {
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((res) => {
-        console.log(res);
-        this.accountService.loginSocialGoogle(this.userApp).subscribe();
+        console.log(res.email);
+        this.accountService.loginSocialGoogle(this.userApp).subscribe(
+          (res) => {
+            if (res.email != null || res.email != "") {
+              this.addCart();
+              this.backToPreviousPage();
+            }
+          }
+        )
         this.refreshToken();
-      }).catch((err) => console.error(err)).finally(() => {
-        setTimeout(() => {
-          this.addCart();
-          this.backToPreviousPage()
-        }, 2000);
-      });
+      }).catch((err) => console.error(err))
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then((res) => {
         console.log(res);
-        this.accountService.loginSocialFB(this.userApp).subscribe()
-      }).catch((err) => console.error(err)).finally(() => {
-        setTimeout(() => {
-          this.addCart();
-          this.backToPreviousPage()
-        }, 2000);
-      });
+        this.accountService.loginSocialFB(this.userApp).subscribe(
+          (res) => {
+            this.addCart();
+            res ? this.backToPreviousPage() : null;
+          }
+        )
+      }).catch((err) => console.error(err))
   }
 
   refreshToken(): void {
