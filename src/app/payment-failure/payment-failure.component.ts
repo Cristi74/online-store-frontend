@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
-import { type } from 'node:os';
 
 @Component({
   selector: 'app-payment-failure',

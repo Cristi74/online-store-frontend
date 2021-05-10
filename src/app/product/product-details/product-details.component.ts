@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { cartBE } from './../../models/cartBE';
-import { first } from 'rxjs/operators';
+import { first, ignoreElements } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-details',
@@ -60,7 +60,14 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     });
   }
   openDialog() {
-    this.dialog.open(ProductDetailsDialogComponent, { data: this.product });
+    if (this.darkTheme) {
+      this.dialog.open(ProductDetailsDialogComponent, {
+        panelClass: 'custom-modalbox',
+        data: this.product
+      })
+    } else this.dialog.open(ProductDetailsDialogComponent, {
+      data: this.product
+    })
   }
   modifyQuantity(val: number) {
     if (!(val === -1 && this.qty === 1)) {
