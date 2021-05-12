@@ -7,6 +7,7 @@ import { Component, ElementRef, OnInit, AfterViewInit, Inject } from '@angular/c
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { DOCUMENT } from '@angular/common';
+import { cartBE } from '../models/cartBE';
 
 @Component({
   selector: 'app-order',
@@ -27,10 +28,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
   isHidden = false;
   section = 1;
   confirm = false;
-  address=true;
+  address = true;
   transportFee = environment.transportFee;
   darkTheme!: boolean;
   curentTheme!: string;
+  outOfStock = false;
+  outOfStockMsg!: string;
 
   constructor(
     private orderService: OrderService,
@@ -45,46 +48,81 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
     this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
-    if (Object.keys(this.cart).length > 0) {
-      let productsIds = Object.keys(this.cart.products);
+    this.prepareOrder(this.cart)
+  }
+
+  prepareOrder(obj: cartBE) {
+    this.products = [];
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
+
+    if (Object.keys(obj).length > 0) {
+      let productsIds = Object.keys(obj.products);
       productsIds.forEach((element: string) =>
         this.productService.getProduct(element).subscribe((res) => {
           let product = res;
-          product.qty = this.cart.products[res.id];
+          product.qty = obj.products[res.id];
           this.products.push(product);
           this.orderValue += product.price * product.qty;
           this.orderObject[product.id] = product.qty;
         })
       );
     }
-    this.orderValue = parseFloat(this.orderValue.toFixed(2));
   }
+
   placeOrder() {
     let order = Object();
+    this.outOfStock = false;
+    this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
     order['orderDate'] = new Date();
     order['orderValue'] = this.orderValue;
     order['orderedProducts'] = this.orderObject;
     order['userId'] = this.user.id;
-    if(this.user.addressEntity.address!='' && this.user.addressEntity.city!='') 
+    console.log(order);
+
+    if (this.user.addressEntity.address != '' && this.user.addressEntity.city != '')
       this.orderService.postOrder(order).subscribe(
         (response: Response) => {
+          console.log(response);
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 3000);
           localStorage.removeItem('cart');
           this.cartService.deleteCart(this.cart.id).subscribe();
           this.cartService.update({});
-          this.confirm=true;
+          this.confirm = true;
+          this.outOfStock = false;
         },
         (error) => {
-          console.error(error);
+          console.log(error);
+          if (error.error.substring(0, 15) === "There are only:") {
+            let wishedProducts = order.orderedProducts
+            let numberPattern = /\d+/g;
+            let itemsInStock = parseInt(error.error.match(numberPattern)[0])
+            this.orderValue = 0;
+            this.outOfStock = true;
+            this.outOfStockMsg = error.error;
+            Object.entries(wishedProducts).forEach(
+              ([key, value]) => {
+                this.productService.getProduct(key).subscribe((res) => {
+                  if (res.itemsInStock <= itemsInStock) {
+                    order.orderedProducts[key] = res.itemsInStock;
+                    this.cart.products[key] = res.itemsInStock;
+                    localStorage.setItem('cart', JSON.stringify(this.cart));
+                    this.cartService.update(this.cart);
+                    this.prepareOrder(this.cart)
+                  }
+                })
+              }
+            );
+          }
         }
       );
     else {
-      this.address=false;
-      this.confirm=true;
+      this.address = false;
+      this.confirm = true;
       setTimeout(() => {
-        this.confirm=false;
+        this.confirm = false;
         this.router.navigate(['/account/details'])
       }, 3000);
     }
@@ -122,5 +160,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = this.curentTheme
     this.darkTheme = JSON.parse(localStorage.getItem('darkTheme')!)
     console.log(this.darkTheme, this.curentTheme)
+  }
+  noContinue() {
+    this.router.navigate(['/cart']);
+    this.outOfStock = false;
   }
 }

@@ -80,7 +80,7 @@
       <h2>{{ "Order.Confirm order" | translate }}</h2>
       <div class="space-between">
         <span class="price distance">{{ "Order.Products" | translate }} </span>
-        <p>{{ orderValue }} lei</p>
+        <p>{{ orderValue.toFixed(2) }} lei</p>
       </div>
       <div class="space-between">
         <span class="price distance">{{ "Order.Shipping" | translate }} </span
@@ -96,7 +96,7 @@
       <div class="space-between">
         <span class="price distance bigger">
           {{ "Order.Total value" | translate }}</span
-        ><span class="bigger">{{ orderValue }} lei</span>
+        ><span class="bigger">{{ orderValue.toFixed(2) }} lei</span>
       </div>
       <p class="payment-methode-title">
         {{ "Order.Currency" | translate }}
@@ -150,6 +150,20 @@
     <mat-icon>cancel</mat-icon>
     <h3>{{ "Order.noAddress" | translate }}</h3>
     <h2>{{ "Order.register" | translate }}</h2>
+  </div>
+  <div
+    class="confirm red out-of-stock"
+    [ngClass]="darkTheme ? 'dark' : 'confirm-light'"
+    *ngIf="outOfStock == true"
+  >
+    <mat-icon>cancel</mat-icon>
+    <h3 style="color: #ff0000">{{ outOfStockMsg }}</h3>
+    <h3>{{ "Order.adjust" | translate }}</h3>
+    <h3>{{ "Order.continue" | translate }}</h3>
+    <div class="buttons">
+      <button (click)="noContinue()">{{ "Order.no" | translate }}</button>
+      <button (click)="placeOrder()">{{ "Order.yes" | translate }}</button>
+    </div>
   </div>
 </div>
 

@@ -176,7 +176,11 @@
         "Currency": "Choose currency",
         "Payment methode": "Payment method",
         "noAddress": "You account doesn't contain an address",
-        "register": "Please add one in User Details section"
+        "register": "Please add one in User Details section",
+        "adjust": "We have adjusted your cart within the stock limit!",
+        "continue": "Do you wish to continue?",
+        "no": "No",
+        "yes": "Yes"
     },
     "PaymentSuccess": {
         "Pending": "Pending",
