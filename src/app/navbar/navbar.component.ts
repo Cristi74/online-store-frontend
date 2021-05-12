@@ -92,6 +92,5 @@ export class NavbarComponent implements OnInit {
   changeThemes() {
     let bckColor = this.darkTheme ? "#3d3c3c" : "#fafbfc";
     this.curentTheme.emit(bckColor);
-    console.log(this.curentTheme.emit(bckColor), bckColor)
   }
 }

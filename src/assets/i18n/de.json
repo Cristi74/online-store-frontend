@@ -176,7 +176,11 @@
         "Currency": "Währung wählen",
         "Payment methode": "Zahlungsmethode",
         "noAddress": "Ihr Konto enthält keine Adresse",
-        "register": "Bitte fügen Sie eine aus dem Abschnitt Benutzerdetails hinzu"
+        "register": "Bitte fügen Sie eine aus dem Abschnitt Benutzerdetails hinzu",
+        "adjust": "Wir haben Ihren Warenkorb innerhalb des Lagerlimits angepasst!",
+        "continue": "Möchten Sie fortfahren?",
+        "no": "Nein",
+        "yes": "Ja"
     },
     "PaymentSuccess": {
         "Pending": "Steht aus",

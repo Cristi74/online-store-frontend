@@ -176,7 +176,11 @@
         "Currency": "Alege moneda",
         "Payment methode": "Modalitate de plata",
         "noAddress": "Contul tau nu are o adresa de livrare",
-        "register": "Te rugam sa adaugi o adresa in sectiunea Detalii utilizator"
+        "register": "Te rugam sa adaugi o adresa in sectiunea Detalii utilizator",
+        "adjust": "V-am ajustat coșul în limita stocului!",
+        "continue": "Doriti sa continuati?",
+        "no": "Nu",
+        "yes": "Da"
     },
     "PaymentSuccess": {
         "Pending": "In curs de procesare",
