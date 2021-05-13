@@ -34,6 +34,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
   curentTheme!: string;
   outOfStock = false;
   outOfStockMsg!: string;
+  haveStock!: boolean;
+  productName!: string;
+
 
   constructor(
     private orderService: OrderService,
@@ -53,8 +56,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   prepareOrder(obj: cartBE) {
     this.products = [];
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
 
     if (Object.keys(obj).length > 0) {
       let productsIds = Object.keys(obj.products);
@@ -62,9 +63,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
         this.productService.getProduct(element).subscribe((res) => {
           let product = res;
           product.qty = obj.products[res.id];
-          this.products.push(product);
-          this.orderValue += product.price * product.qty;
-          this.orderObject[product.id] = product.qty;
+          if (product.qty != 0) {
+            this.products.push(product);
+            this.orderValue += product.price * product.qty;
+            this.orderObject[product.id] = product.qty;
+          }
         })
       );
     }
@@ -76,14 +79,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
     order['orderDate'] = new Date();
     order['orderValue'] = this.orderValue;
-    order['orderedProducts'] = this.orderObject;
+    order['orderedProducts'] = this.cart.products;
     order['userId'] = this.user.id;
-    console.log(order);
 
     if (this.user.addressEntity.address != '' && this.user.addressEntity.city != '')
       this.orderService.postOrder(order).subscribe(
         (response: Response) => {
           console.log(response);
+
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 3000);
@@ -95,7 +98,24 @@ export class OrderComponent implements OnInit, AfterViewInit {
         },
         (error) => {
           console.log(error);
-          if (error.error.substring(0, 15) === "There are only:") {
+
+          if (error.status == 400) {
+            let localCart = JSON.parse(localStorage.getItem('cart') || '{}');
+            this.outOfStockMsg = error.error[0];
+            this.haveStock = true;
+            this.outOfStock = true;
+            for (let key in localCart.products) {
+              if (localCart.products[key] == 0) {
+                delete localCart.products[key];
+              }
+            }
+            localStorage.setItem('cart', JSON.stringify(localCart));
+            this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
+            this.cartService.update(this.cart);
+            this.prepareOrder(this.cart);
+          }
+
+          if (error.status == 500 && error.error.substring(0, 15) === "There are only:") {
             let wishedProducts = order.orderedProducts
             let numberPattern = /\d+/g;
             let itemsInStock = parseInt(error.error.match(numberPattern)[0])
@@ -108,9 +128,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
                   if (res.itemsInStock <= itemsInStock) {
                     order.orderedProducts[key] = res.itemsInStock;
                     this.cart.products[key] = res.itemsInStock;
+                    if (res.itemsInStock == 0) {
+                      delete this.cart.products[key];
+                    }
+                    this.productName = res.name;
                     localStorage.setItem('cart', JSON.stringify(this.cart));
                     this.cartService.update(this.cart);
-                    this.prepareOrder(this.cart)
+                    this.prepareOrder(this.cart);
+                    res.itemsInStock != 0 ? this.haveStock = true : this.haveStock = false;
                   }
                 })
               }

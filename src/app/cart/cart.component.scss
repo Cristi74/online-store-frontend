@@ -103,6 +103,20 @@ a:hover {
 .product-name {
   flex-grow: 2;
   max-width: 75%;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    margin: 0;
+  }
+  .limitedStock {
+    color: #ff0000;
+  }
+  .someStock {
+    color: #ffa500;
+  }
+  .goodStock {
+    color: #008000;
+  }
 }
 .product-data {
   padding-left: 2rem;

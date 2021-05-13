@@ -180,7 +180,9 @@
         "adjust": "Wir haben Ihren Warenkorb innerhalb des Lagerlimits angepasst!",
         "continue": "Möchten Sie fortfahren?",
         "no": "Nein",
-        "yes": "Ja"
+        "yes": "Ja",
+        "This product:": "Dieses Produkt: ",
+        "no longer": " nicht mehr in unserem Angebot. Entschuldigen Sie die Unannehmlichkeiten."
     },
     "PaymentSuccess": {
         "Pending": "Steht aus",

@@ -180,7 +180,9 @@
         "adjust": "We have adjusted your cart within the stock limit!",
         "continue": "Do you wish to continue?",
         "no": "No",
-        "yes": "Yes"
+        "yes": "Yes",
+        "This product:": "This product: ",
+        "no longer": " it is no longer in our offer. Sorry for the inconvenience."
     },
     "PaymentSuccess": {
         "Pending": "Pending",

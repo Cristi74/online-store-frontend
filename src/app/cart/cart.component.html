@@ -25,6 +25,17 @@
             size="18px"
             [readonly]="true"
           ></star-rating>
+          <h3
+            [ngClass]="
+              product.itemsInStock >= 20
+                ? 'goodStock'
+                : product.itemsInStock > 10
+                ? 'someStock'
+                : 'limitedStock'
+            "
+          >
+            {{ product.itemsInStock }} pcs in stock
+          </h3>
         </div>
         <div class="poduct-wraper">
           <div class="product-data">
