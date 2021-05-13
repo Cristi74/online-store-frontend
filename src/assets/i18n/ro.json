@@ -180,7 +180,9 @@
         "adjust": "V-am ajustat coșul în limita stocului!",
         "continue": "Doriti sa continuati?",
         "no": "Nu",
-        "yes": "Da"
+        "yes": "Da",
+        "This product:": "Acest produs: ",
+        "no longer": "nu mai este în oferta noastră. Ne pare rău pentru neplăcerile create."
     },
     "PaymentSuccess": {
         "Pending": "In curs de procesare",

@@ -157,7 +157,12 @@
     *ngIf="outOfStock == true"
   >
     <mat-icon>cancel</mat-icon>
-    <h3 style="color: #ff0000">{{ outOfStockMsg }}</h3>
+    <h3 style="color: #ff0000" *ngIf="haveStock">{{ outOfStockMsg }}</h3>
+    <h3 style="color: #ff0000" *ngIf="!haveStock">
+      {{ "Order.This product:" | translate }}
+      <span style="color: #ffa500">"{{ productName }}"</span>
+      {{ "Order.no longer" | translate }}
+    </h3>
     <h3>{{ "Order.adjust" | translate }}</h3>
     <h3>{{ "Order.continue" | translate }}</h3>
     <div class="buttons">
