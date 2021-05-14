@@ -1,6 +1,6 @@
 <app-navbar (curentTheme)="receive($event)"></app-navbar>
 <div *ngIf="products.length != 0" class="main">
-  <div class="container mat-elevation-z2">
+  <div class="container mat-elevation-z2" [ngClass]="{ loading: loading }">
     <div
       class="mat-elevation-z3 flex list"
       [ngClass]="{ current: section === 1, 'elevated-dark': darkTheme }"

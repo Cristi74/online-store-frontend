@@ -36,6 +36,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   outOfStockMsg!: string;
   haveStock!: boolean;
   productName!: string;
+  loading = false;
 
 
   constructor(
@@ -76,6 +77,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   placeOrder() {
     let order = Object();
     this.outOfStock = false;
+    this.loading = true;
     this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
     order['orderDate'] = new Date();
     order['orderValue'] = this.orderValue;
@@ -86,7 +88,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.orderService.postOrder(order).subscribe(
         (response: Response) => {
           console.log(response);
-
+          this.loading = false;
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 3000);
